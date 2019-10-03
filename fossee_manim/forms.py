@@ -1,5 +1,7 @@
 from django import forms
 from django.utils import timezone
+from taggit.forms import TagWidget
+
 from .models import (
                     Profile, User, Animation,
                     Comment, AnimationStats
@@ -264,6 +266,9 @@ class AnimationProposal(forms.ModelForm):
     class Meta:
         model = Animation
         fields = ['category', 'subcategory', 'title', 'outline', 'tags']
+        widgets = {
+            'tags': TagWidget(),
+        }
 
 
 class CommentForm(forms.ModelForm):

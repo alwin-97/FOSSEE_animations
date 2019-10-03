@@ -166,6 +166,12 @@ class Category(models.Model):
         return u"{0}".format(self.name)
 
 
+# test
+class Example(models.Model):
+    name = models.CharField(max_length=20)
+    tags = TaggableManager()
+
+
 class Animation(models.Model):
     title = models.CharField(max_length=255)
     contributor = models.ForeignKey(User, on_delete=models.CASCADE)
