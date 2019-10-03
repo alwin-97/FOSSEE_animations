@@ -5,8 +5,8 @@
 	{% endblock %}
 
 {% block content %}
-	<div class="container-fluid jumbotron" align = "justify" style="margin-top:20px; padding:50px; background-color: transparent;">
-		 <!-- style="padding-top:120px"> -->
+	<div class="container-fluid jumbotron" align = "justify" style="margin-top:20px; margin-bottom: 56px; padding:50px; background-color: transparent;">
+		 {% comment %}style="padding-top:120px"> {% endcomment %}
 		 <center>
 		<h1>About FOSSEE Animations</h1>
 		<h4 style= "color: #555555;"><i>What</i> do we do and <i>why</i>?</h4>
@@ -16,4 +16,7 @@
 		<hr>
 </div>
 	</div>
-		{% endblock content %}
+    <div>
+        {% endblock content %}
+    </div>
+
