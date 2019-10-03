@@ -10,6 +10,36 @@
 
             <h2> Proposal Status </h2>
             <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <h2>Sort by :</h2>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="{%  url 'sortproposal_rejected' %}">
+                        <button type="button" class="btn btn-info" id="btnred">Rejected</button>
+                    </a>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="{% url 'sortproposal_released' %}">
+                        <button type="button" class="btn btn-info" id="btnred">Released</button>
+                    </a>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="{% url 'sortproposal_changes' %}">
+                        <button type="button" class="btn btn-info" id="btnred">Changes</button>
+                    </a>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="{% url 'sortproposal_pending' %}">
+                        <button type="button" class="btn btn-info" id="btnred">Pending</button>
+                    </a>
+                </div>
+            </div>
+            <hr>
             <table class="table table-hover" style="font-family: 'Lato', sans-serif;">
                 <thead>
                 <tr>
@@ -18,7 +48,7 @@
                     <th>Created Date</th>
                     {% if request.user.profile.position == 'reviewer' %}
                         <th>Contributor Name</th>
-                        <th>Mail Status</th>
+                        {#                        <th>Mail Status</th>#}
                     {% endif %}
                 </tr>
                 </thead>
@@ -36,18 +66,18 @@
                         <td><span class="badge">{{ an.created }}</span></td>
                         {% if request.user.profile.position == 'reviewer' %}
                             <td>{{ an.contributor.get_full_name }}</td>
-                             <td>{{ an.contributor.get_full_name }}</td>
+                            {#                             <td>{{ an.contributor.get_full_name }}</td>#}
                         {% endif %}
                         <td><a href="{% url 'edit_proposal' an.id %}">
                             <button type="button" class="btn btn-info"
                                     id="btnblue">Edit
                             </button>
                         </a></td>
-                     {% if request.user.profile.position == 'reviewer' %}
-                        <td><a href="{% url 'delete_proposal' an.id %}">
-                            <button type="button" class="btn btn-info" id="btnred">Delete</button>
-                        </a></td>
-                      {% endif %}
+                        {% if request.user.profile.position == 'reviewer' %}
+                            <td><a href="{% url 'delete_proposal' an.id %}">
+                                <button type="button" class="btn btn-info" id="btnred">Delete</button>
+                            </a></td>
+                        {% endif %}
                     </tr>
                     </tbody>
                 {% endfor %}
