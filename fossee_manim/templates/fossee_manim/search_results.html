@@ -1,33 +1,35 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		Search Result
-	{% endblock %}
+{% block title %}
+Search Result
+{% endblock %}
 
 {% block content %}
 <br> <br>
 <div class="container-fluid jumbotron" style="margin-top:20px">
-		{% if s_result %}
-			{% for anime in s_result %}
-				<div class="row">
-					<div class="col-md-4" >
-						<a href="{% url 'video' anime.id  %}" >
-							<span class="fa fa-play fa-4x" id="play-btn"></span>
-							<img height="90%" width="100%" src="{{ anime.thumbnail.url }}">
-						</a>
-					</div>
-					<div class="col-md-4">
-						<p style="color:#157b80; font-size: 300%;"> {{ anime.animation.title }} </p>
-						<p style="color:black; font-size: 100%;"> {{ anime.animation.description | truncatewords:5}} </p>
-						<a target="_blank" href="{{ anime.animation.github }}"><p style="font-size: 70%;"> {{ anime.animation.github }} </p></a>
-					</div>
-				</div>
-			<hr>
-			{% endfor %}
-		{% else %}
-				<h3>No Results Found </h3>
-				<hr>
-		{% endif %}
+	{% if s_result %}
+	{% for anime in s_result %}
+	<div class="row">
+		<div class="col-md-4">
+			<a href="{% url 'video' anime.id  %}">
+				<span class="fa fa-play fa-4x" id="play-btn"></span>
+				<img height="90%" width="100%" src="{{ anime.thumbnail.url }}">
+			</a>
+		</div>
+		<div class="col-md-4">
+			<p style="color:#157b80; font-size: 300%;"> {{ anime.animation.title }} </p>
+			<p style="color:black; font-size: 100%;"> {{ anime.animation.description | truncatewords:5}} </p>
+			<a target="_blank" href="{{ anime.animation.github }}">
+				<p style="font-size: 70%;"> {{ anime.animation.github }} </p>
+			</a>
+		</div>
+	</div>
+	<hr>
+	{% endfor %}
+	{% else %}
+	<h3>No Results Found </h3>
+	<hr>
+	{% endif %}
 	<br>
 </div>
 <br>

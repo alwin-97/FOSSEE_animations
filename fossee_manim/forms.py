@@ -261,6 +261,7 @@ class AnimationProposal(forms.ModelForm):
             'any other related information')
         }
 
+
     class Meta:
         model = Animation
         fields = ['category', 'subcategory', 'title', 'outline', 'tags']
@@ -281,7 +282,6 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'comments': forms.CharField(),
         }
-
 
 class UploadAnimationForm(forms.ModelForm):
 

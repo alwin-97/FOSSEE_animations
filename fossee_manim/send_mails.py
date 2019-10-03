@@ -103,6 +103,7 @@ def send_email(request, call_on, contributor=None, key=None, proposal=None):
 			"Congratulations! Your Animation has been Accepted!", message, SENDER_EMAIL,
 				[contributor.profile.user.email], fail_silently=True
 				)
+		"""create a table and add the status as mail send"""
 	elif call_on == 'rejected':
 		message = dedent("""\
 					Dear {0},

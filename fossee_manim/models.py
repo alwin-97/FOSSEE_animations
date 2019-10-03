@@ -172,6 +172,8 @@ class Animation(models.Model):
     reviewer = models.ForeignKey(User, null=True, on_delete=models.CASCADE,
                                  related_name="%(app_label)s_%(class)s_related")
     outline = models.TextField()
+    # concepts = models.TextField()
+    # audience=models.TextField()
     status = models.CharField(max_length=255, choices=status)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.CharField(max_length=255, blank=True)

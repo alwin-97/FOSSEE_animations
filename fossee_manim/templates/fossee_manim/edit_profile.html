@@ -1,7 +1,7 @@
 {% extends "fossee_manim/base.html" %}
 
 {% block title %}
-	Edit Profile
+Edit Profile
 {% endblock %}
 
 {% block extra %}
@@ -11,18 +11,20 @@
 
 {% block content %}
 <br>
-  <div class="container">
-	<center>  <h1> Edit Profile </h1> </center>
-    <form action="{{URL_ROOT}}/edit_profile/" method="post" >
+<div class="container">
+  <center>
+    <h1> Edit Profile </h1>
+  </center>
+  <form action="{{URL_ROOT}}/edit_profile/" method="post">
     {% csrf_token %}
-      <center>
-        <table class="table table-bordered">
-          {{ form.as_table }}
-        </table>
-      </center>
-      <br>
-        <button class="btn btn-primary pull-right" type="submit" id="btnblue">Save Profile</button>
-    </form>
-	<br> <br> <br>
-  </div>
+    <center>
+      <table class="table table-bordered">
+        {{ form.as_table }}
+      </table>
+    </center>
+    <br>
+    <button class="btn btn-primary pull-right" type="submit" id="btnblue">Save Profile</button>
+  </form>
+  <br> <br> <br>
+</div>
 {% endblock %}

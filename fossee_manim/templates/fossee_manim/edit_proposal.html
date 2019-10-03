@@ -1,8 +1,8 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		Edit Proposal
-	{% endblock %}
+{% block title %}
+Edit Proposal
+{% endblock %}
 
 {% block content %}
 <script type="text/javascript">
@@ -10,120 +10,121 @@
 </script>
 <br>
 <div class="container">
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}
-            </li>
-          </div>
-        {% endfor %}
-    </ul>
-    {% endif %}
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}
+      </li>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
 
-  <form method="POST" >
-  {% csrf_token %}
+  <form method="POST">
+    {% csrf_token %}
 
-      <table class="table table-bordered">
-        {{ proposal_form.as_table }}
-      </table>
+    <table class="table table-bordered">
+      {{ proposal_form.as_table }}
+    </table>
 
     <br>
-      <button class="btn btn-primary pull-right" type="submit" id="btnblue">Save</button>
-      <br>
+    <button class="btn btn-primary pull-right" type="submit" id="btnblue">Save</button>
+    <br>
   </form>
   <br>
 
   {% if  proposal_form.instance.status == 'changes' and request.user.profile.position == 'contributor' %}
   <form method="POST" action="{% url 'upload_animation' proposal_form.instance.id %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <label class="btn btn-info">
-          {{ upload_form }}
-          <button class="btn btn-success" type="submit">Upload</button>
-          {{ msg }}
-      </label>
+    {% csrf_token %}
+    <label class="btn btn-info">
+      {{ upload_form }}
+      <button class="btn btn-success" type="submit">Upload</button>
+      {{ msg }}
+    </label>
   </form>
   {% elif proposal_form.instance.status == 'pending' and request.user.profile.position == 'contributor' %}
-    <h3>Awaiting Reviewer's Moderation  </h3>
-    <h6>Further details regarding the second stage of Proposal will be shared with you over the email shortly</h6>
+  <h3>Awaiting Reviewer's Moderation </h3>
+  <h6>Further details regarding the second stage of Proposal will be shared with you over the email shortly</h6>
 
   {% else %}
-    <video width="100%" height="100%" controls>
-      <source src="{{video.0.video_path.url}}" type="video/mp4">
-    </video>
+  <video width="100%" height="100%" controls>
+    <source src="{{video.0.video_path.url}}" type="video/mp4">
+  </video>
   {% endif %}
 
   <br><br>
   {% if request.user.profile.position == 'reviewer' %}
-  <form method="POST" >
-			{% csrf_token %}
-			<div class="form-group">
-        <div class="row">
-          <button class="btn btn-success pull-left" type="submit" name="release" value="1">Approve</button>
-          <button class="btn btn-danger pull-left" type="submit" name="rejected" value="2" style="margin-left: 1%">Reject</button>
-          <button class="btn btn-info pull-left" type="submit" name="proposal_form" value="3" style="margin-left: 1%" >Send Proposal 2 Form</button>
-        </div>
-			</div>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="row">
+        <button class="btn btn-success pull-left" type="submit" name="release" value="1">Approve</button>
+        <button class="btn btn-danger pull-left" type="submit" name="rejected" value="2"
+          style="margin-left: 1%">Reject</button>
+        <button class="btn btn-info pull-left" type="submit" name="proposal_form" value="3" style="margin-left: 1%">Send
+          Proposal 2 Form</button>
+      </div>
+    </div>
   </form>
   {% endif %}
   <br><br>
 
   <h2>Comments</h2>
   <div>
-      <form method="POST">
-          <br>
-        {% csrf_token %}
-          {{ comment_form.as_p }}
-          <button type="submit" class="btn btn-default">Post</button>
-      </form>
-
-    </div>
-    <hr style="background-color: #fff;
-        border-top: 5px double #8c8b8b;">
-    <table>
-      {% for comment in comments %}
-      <tbody>
-        <tr>
-          <td>
-            <h5>{{ comment.commentor.profile.user.get_full_name }} | {{ comment.created_date | date  }}</h5>
-            <h6 style="background-color: #ecf0f1; padding:10px;">{{ comment.comment }}</h6>
-            <hr style="border-top: 0.5px solid #8c8b8b;">
-          </td>
-        </tr>
-      </tbody>
-      {% endfor %}
-    </table>
-
-<br><br>
-  </div>
-
-  <!-- Page Navigation -->
-  <div class="container">
-      <div class="Page-Nav" align="center">
-      <nav aria-label="Page navigation">
-         <ul class="pagination pagination-sm">
-            <li class="page-item">
-              {% if comments.has_previous %}
-            <a class="page-link" tabindex="-1"
-                href="?page={{ comments.previous_page_number }}">Previous</a>
-            {% endif %}
-            </li>
-            <li class="page-item">
-            <span class="current">
-          Page {{ comments.number }} of {{ comments.paginator.num_pages }}
-            </span>
-          </li>
-            <li class="page-item">
-            {% if comments.has_next %}
-            <a class="page-link" href="?page={{ comments.next_page_number }}">Next
-            </a>
-          {% endif %}
-            </li>
-          </ul>
-      </nav>
-      </div>
+    <form method="POST">
       <br>
-    </div>
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <button type="submit" class="btn btn-default">Post</button>
+    </form>
+
+  </div>
+  <hr style="background-color: #fff;
+        border-top: 5px double #8c8b8b;">
+  <table>
+    {% for comment in comments %}
+    <tbody>
+      <tr>
+        <td>
+          <h5>{{ comment.commentor.profile.user.get_full_name }} | {{ comment.created_date | date  }}</h5>
+          <h6 style="background-color: #ecf0f1; padding:10px;">{{ comment.comment }}</h6>
+          <hr style="border-top: 0.5px solid #8c8b8b;">
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+
+  <br><br>
+</div>
+
+<!-- Page Navigation -->
+<div class="container">
+  <div class="Page-Nav" align="center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-sm">
+        <li class="page-item">
+          {% if comments.has_previous %}
+          <a class="page-link" tabindex="-1" href="?page={{ comments.previous_page_number }}">Previous</a>
+          {% endif %}
+        </li>
+        <li class="page-item">
+          <span class="current">
+            Page {{ comments.number }} of {{ comments.paginator.num_pages }}
+          </span>
+        </li>
+        <li class="page-item">
+          {% if comments.has_next %}
+          <a class="page-link" href="?page={{ comments.next_page_number }}">Next
+          </a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <br>
+</div>
 
 </div>
 

@@ -1,38 +1,40 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		FOSSEE Animation
-	{% endblock %}
+{% block title %}
+FOSSEE Animation
+{% endblock %}
 
 {% block content %}
+<br>
+<div class="container-fluid">
     <br>
-	<div class="container-fluid" >
-        <br>
-        <div class="row" align="center">
-            <div class="col-md-12">
-                <h1 style="float: left;">{{ categorial_list.0.animation.category }}</h1>
-            </div>
+    <div class="row" align="center">
+        <div class="col-md-12">
+            <h1 style="float: left;">{{ categorial_list.0.animation.category }}</h1>
         </div>
-        <hr>
-        <br>
+    </div>
+    <hr>
+    <br>
 
     {% for video in categorial_list %}
-        <div class="row">
-            <div class="col-md-4">
-                <a href="{% url 'video' video.id  %}" >
-                    <span class="fa fa-play fa-4x" id="play-btn"></span>
-                    <img height="90%" width="100%" src="{{ video.thumbnail.url }}">
-                </a>
-            </div>
-            <div class="col-md-4">
-                <p style="color:#26A669; font-size: 300%;"> {{ video.animation.title }} </p>
-                <p style="color:#26A669; font-size: 100%;"> {{ video.animation.description | truncatewords:5}} </p>
-                <a target="_blank" href="{{ video.animation.github }}"><p style="font-size: 70%;"> {{ video.animation.github }} </p></a>
-            </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{% url 'video' video.id  %}">
+                <span class="fa fa-play fa-4x" id="play-btn"></span>
+                <img height="90%" width="100%" src="{{ video.thumbnail.url }}">
+            </a>
         </div>
+        <div class="col-md-4">
+            <p style="color:#26A669; font-size: 300%;"> {{ video.animation.title }} </p>
+            <p style="color:#26A669; font-size: 100%;"> {{ video.animation.description | truncatewords:5}} </p>
+            <a target="_blank" href="{{ video.animation.github }}">
+                <p style="font-size: 70%;"> {{ video.animation.github }} </p>
+            </a>
+        </div>
+    </div>
     <hr>
     {% endfor %}
-        <br>
-    </div>
     <br>
+</div>
+<br>
 {% endblock %}

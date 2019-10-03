@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html style="height: 100%;">
+
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
 		{% block title %}
-			HomePage
+		HomePage
 		{% endblock %}
 	</title>
 
 	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,20 +20,21 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- favicon -->
-  <link rel="shortcut icon" href="{{ URL_ROOT }}/static/img/favicon.ico" />
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{{ URL_ROOT }}/static/img/favicon.ico" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat|Lato&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ URL_ROOT }}/static/css/custom_base.css" type="text/css" />
+	<link rel="stylesheet" href="{{ URL_ROOT }}/static/css/index.css" type="text/css" />
 </head>
 
-	<!-- For js/ajax and other related scripts -->
-  {% block extra %}
+<!-- For js/ajax and other related scripts -->
+{% block extra %}
 
-  {% endblock %}
+{% endblock %}
 
 <body>
- {% block header %}
- 	<nav class="navbar navbar-expand-md row fixed-top" style="background-color:#222222; padding-top: 20px; padding-bottom: 20px;">
+	{% block header %}
+	<nav class="navbar navbar-expand-md row fixed-top" style="background-color:#222222; padding-top: 20px; padding-bottom: 20px;">
 		<a class="navbar-brand" href="{% url 'index' %}">
 			<img src="{{ URL_ROOT }}/static/img/logo_main.png" width="150" height="33.75" alt="" style="margin-right: 50px; margin-left: 20px">
 		</a>
@@ -108,27 +110,17 @@
 			<button class="btn btn-link perma_link" type="button"><a href="{% url 'library' %}" style="color:#222222">Library</a></button>
 		</div>
 	</div>
-
-	<link rel="stylesheet" type="text/css" href="https://fossee.in/data/banner/css/nice-bar.css" />
- <script type="text/javascript" src="https://fossee.in/data/banner/js/nice-bar.js"></script>
- <div style= "margin:30px;">
- <center>
- <a href="https://scipy.in/2019" target="_blank"> <img class="img-responsive" src="https://static.fossee.in/scipy2019/email-templates/SciPyIndia2019.gif"></a>
- </center>
- </div>
-  	{% endblock %}
-
-    {% block content %}
-    <br><br>
-		<h1>Base Template Content. Please override me</h1>
-		</div>
 	{% endblock %}
 
-
+	{% block content %}
+	<br><br>
+	<h1>Base Template Content. Please override me</h1>
+	</div>
+	{% endblock %}
 	<!-- </main> -->
 
 	{% block footer %}
-<footer class= "footer" style="background-color: #222222; font-family: 'Lato', sans-serif; padding:30px;">
+	<footer class="footer" style="background-color: #222222; font-family: 'Lato', sans-serif; padding:30px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 text-center">
@@ -136,42 +128,45 @@
 				</div>
 				<div class="col-md-4 text" style="color:#dddddd;">
 					FOSSEE | IIT-Bombay <br>
-					Mumbai, India  - 400-076 <br>
+					Mumbai, India - 400-076 <br>
 					Phone: (+91) 22-2576-4133<br>
 					Email: animations@fossee.in
 				</div>
 				<div class="col-md-4 text-center" style="color:#dddddd; margin-top: 15px">
-				  Follow us on:<br/>
-				  <a href="https://twitter.com/fosseenmeict" class="fa fa-twitter"></a>
-				  &nbsp; &nbsp; &nbsp;
-				  <a href="https://www.instagram.com/fossee_nmeict/" class="fa fa-instagram"></a>
-				  &nbsp; &nbsp; &nbsp;
-				  <a href="https://www.facebook.com/FOSSEENMEICT/" class="fa fa-facebook"></a>
-				  &nbsp; &nbsp; &nbsp;
-				  <a href="https://github.com/FOSSEE/" class="fa fa-github"></a>
+					Follow us on:<br />
+					<a href="https://twitter.com/fosseenmeict" class="fa fa-twitter"></a>
+					&nbsp; &nbsp; &nbsp;
+					<a href="https://www.instagram.com/fossee_nmeict/" class="fa fa-instagram"></a>
+					&nbsp; &nbsp; &nbsp;
+					<a href="https://www.facebook.com/FOSSEENMEICT/" class="fa fa-facebook"></a>
+					&nbsp; &nbsp; &nbsp;
+					<a href="https://github.com/FOSSEE/" class="fa fa-github"></a>
 				</div>
 			</div>
 			<hr>
-			<div class="text-center row" style="color: #dddddd; color:white;  padding:10px;margin-left: 10px; text-align:center; margin-bottom:0px;">
-				The FOSSEE project is funded by the National Mission on Education through ICT, MHRD, Government of India.
-					This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
+			<div class="text-center row"
+				style="color: #dddddd; color:white;  padding:10px;margin-left: 10px; text-align:center; margin-bottom:0px;">
+				The FOSSEE project is funded by the National Mission on Education through ICT, MHRD, Government of
+				India.
+				This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
 			</div>
 		</div>
-</footer>
+	</footer>
 
 	{% endblock footer %}
-
-<!-- START Bootstrap-Alert -->
-	<div class="alert text-center cookiealert" role="alert" style="background: #dddddd; color: black;">
-		  The website is currently undergoing some developmental changes. If you encounter any glitches, write to us at animations@fossee.in ; we value your feedback and suggestions !
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close" >
-    		<span aria-hidden="true">&times;</span>
-  		</button>
+	<!-- 
+	START Bootstrap-Alert 
+	<div class="alert text-center cookiealert" role="alert" style="background: #d1ff3c; color: black;">
+		The website is currently undergoing some developmental changes. If you encounter any glitches, write to us at
+		animations@fossee.in ; we value your feedback and suggestions !
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 	</div>
-	<!-- END Bootstrap-Alert -->
+	END Bootstrap-Alert -->
 
-<!-- JS for alert -->
-<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+	<!-- JS for alert -->
+	<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
 
 
 </body>

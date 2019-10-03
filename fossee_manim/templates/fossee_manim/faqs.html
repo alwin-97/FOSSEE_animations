@@ -1,8 +1,8 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		FAQs
-	{% endblock %}
+{% block title %}
+FAQs
+{% endblock %}
 
 {% block content %}
 <style>
@@ -10,78 +10,137 @@
 		background-color: #f2e680;
 	}
 </style>
-<div class="container-fluid jumbotron" align = "justify" style="margin-top:20px; background-color: transparent">
-	 <!-- style="padding-top:120px"> -->
-<h1><center>Frequently Asked Questions</center></h1>
-	<div class="container" style= "font-family: 'Lato', sans-serif;">
+<div class="container-fluid jumbotron" align="justify" style="margin-top:20px; background-color: transparent">
+	<!-- style="padding-top:120px"> -->
+	<h1>
+		<center>Frequently Asked Questions</center>
+	</h1>
+	<div class="container" style="font-family: 'Lato', sans-serif;">
 
-	<hr>
-	<ul>
-		<li><h5>Who can submit proposals?</h5></li>
-		Anyone can submit proposals.
-		<br><br>
-		<li><h5>Will the contributors receive certificates?</h5></li>
-				Yes, contributors will receive certificates from FOSSEE, IIT Bombay, if their proposal is approved and consequently uploaded on the Animations website.
-		<br><br>
-		<li><h5>Will I get a certificate for each successful proposal? </h5></li>
-				For every unique animation released, you would get a certificate. If you submit a series of animations on closely related topics, you will get one certificate for the entire set of videos, and the same will be accordingly reflected in the certificate.
-		<br><br>
-		<li><h5>When will I get my certificate? </h5></li>
-				Within 15 working days after the animation has been published on the website.
-		<br><br>
-		<li><h5>Do I have to register to contribute?</h5></li>
-				Yes, you have to register and login to your account to follow the procedure for contributing. The detailed instructions are given on the <a href="{% url 'guidelines' %}">Guidelines page. </a>
-		<br><br>
-		<li><h5>Do we have to pay for contributing?</h5></li>
-				No, you don’t have to pay any amount for contributing. In turn, you will receive an honorarium if your proposal gets accepted and you submit your animation on the (animations) website.
-		<br><br>
-		<li><h5>How much honorarium will I receive for a single animation?</h5></li>
+		<hr>
+		<ul>
+			<li>
+				<h5>Who can submit proposals?</h5>
+			</li>
+			Anyone can submit proposals.
+			<br><br>
+			<li>
+				<h5>Will the contributors receive certificates?</h5>
+			</li>
+			Yes, contributors will receive certificates from FOSSEE, IIT Bombay, if their proposal is approved and
+			consequently uploaded on the Animations website.
+			<br><br>
+			<li>
+				<h5>Will I get a certificate for each successful proposal? </h5>
+			</li>
+			For every unique animation released, you would get a certificate. If you submit a series of animations on
+			closely related topics, you will get one certificate for the entire set of videos, and the same will be
+			accordingly reflected in the certificate.
+			<br><br>
+			<li>
+				<h5>When will I get my certificate? </h5>
+			</li>
+			Within 15 working days after the animation has been published on the website.
+			<br><br>
+			<li>
+				<h5>Do I have to register to contribute?</h5>
+			</li>
+			Yes, you have to register and login to your account to follow the procedure for contributing. The detailed
+			instructions are given on the <a href="{% url 'guidelines' %}">Guidelines page. </a>
+			<br><br>
+			<li>
+				<h5>Do we have to pay for contributing?</h5>
+			</li>
+			No, you don’t have to pay any amount for contributing. In turn, you will receive an honorarium if your
+			proposal gets accepted and you submit your animation on the (animations) website.
+			<br><br>
+			<li>
+				<h5>How much honorarium will I receive for a single animation?</h5>
+			</li>
 			The details on the honorarium amount you receive is given <a href="{% url 'honorarium' %}">here</a>
-		<br><br>
-		<li><h5>How much time can I take for making a single animation?</h5></li>
-			We expect you to give a fully working video within 15 days of submitting your Proposal Form 2, after which your proposal would be discarded.
-		<br><br>
-		<li><h5>How many videos can be uploaded per proposal?</h5></li>
-			One video per proposal can be submitted. If you want to submit more than one animation, you will have to submit separate proposals for each of them.
-		<br><br>
-		<li><h5>I am from a non-technical background, but wish to animate the concepts I know.  Can I contribute?</h5></li>
-			Yes. We suggest you get started with the Python language.  There are various good resources for beginners in Python. You could also refer to the free Python Self Learning online course offered by the FOSSEE team at IIT Bombay.
-			Based on what you want to animate, you could use open source tools or libraries such as manim, mayavi, Blender, PySph and so on.
-		<br><br>
-		<li><h5>What all topics can I submit animations on?</h5></li>
-			Any category of science / engineering  topics can be animated (biology, mathematics, aerospace, etc.).
-		<br><br>
-		<li><h5>I want to submit a proposal for a Category other than Mathematics, Physics and Engineering, What should I do?</h5></li>
-			There is an option “Others” in the “Category” field of Proposal Stage 1. Please select that Category. An email will be sent to you regarding your choice of category. Depending on the number of entries for your suggestion, your category might be added to the list of categories in Proposal Stage 1.
-		<br><br>
-		<li><h5>Do the topics I have chosen be college-level?</h5></li>
+			<br><br>
+			<li>
+				<h5>How much time can I take for making a single animation?</h5>
+			</li>
+			We expect you to give a fully working video within 15 days of submitting your Proposal Form 2, after which
+			your proposal would be discarded.
+			<br><br>
+			<li>
+				<h5>How many videos can be uploaded per proposal?</h5>
+			</li>
+			One video per proposal can be submitted. If you want to submit more than one animation, you will have to
+			submit separate proposals for each of them.
+			<br><br>
+			<li>
+				<h5>I am from a non-technical background, but wish to animate the concepts I know. Can I contribute?
+				</h5>
+			</li>
+			Yes. We suggest you get started with the Python language. There are various good resources for beginners in
+			Python. You could also refer to the free Python Self Learning online course offered by the FOSSEE team at
+			IIT Bombay.
+			Based on what you want to animate, you could use open source tools or libraries such as manim, mayavi,
+			Blender, PySph and so on.
+			<br><br>
+			<li>
+				<h5>What all topics can I submit animations on?</h5>
+			</li>
+			Any category of science / engineering topics can be animated (biology, mathematics, aerospace, etc.).
+			<br><br>
+			<li>
+				<h5>I want to submit a proposal for a Category other than Mathematics, Physics and Engineering, What
+					should I do?</h5>
+			</li>
+			There is an option “Others” in the “Category” field of Proposal Stage 1. Please select that Category. An
+			email will be sent to you regarding your choice of category. Depending on the number of entries for your
+			suggestion, your category might be added to the list of categories in Proposal Stage 1.
+			<br><br>
+			<li>
+				<h5>Do the topics I have chosen be college-level?</h5>
+			</li>
 			You may animate concepts of any difficulty level, from school level and up.
-		<br><br>
-		<li><h5>Can I use the videos published on the FOSSEE animations website in my class?</h5></li>
-			Yes. One of the major focus of the FOSSEE Animations project is to promote a visual-approach to learning of science concepts.
-			The videos  are published under a Creative Commons Attribution-ShareAlike 4.0 International License licence.
+			<br><br>
+			<li>
+				<h5>Can I use the videos published on the FOSSEE animations website in my class?</h5>
+			</li>
+			Yes. One of the major focus of the FOSSEE Animations project is to promote a visual-approach to learning of
+			science concepts.
+			The videos are published under a Creative Commons Attribution-ShareAlike 4.0 International License licence.
 			The code used to generate the videos is to be published under the MIT license.
 			<span>Please place the terms and conditions of the MIT license on the GitHub page of your code.</span>
-		<br><br>
-		<li><h5>When will I receive my Honorarium?</h5></li>
+			<br><br>
+			<li>
+				<h5>When will I receive my Honorarium?</h5>
+			</li>
 			Honorarium would generally be processed within 45 days from the day we receive your forms.
-			However, if you do not receive your money within 45 days of acknowledgement of forms received, please feel free to contact us;  we’ll be happy to assist you.
-		<br><br>
-		<li><h5>How many books can I use for reference?</h5></li>
+			However, if you do not receive your money within 45 days of acknowledgement of forms received, please feel
+			free to contact us; we’ll be happy to assist you.
+			<br><br>
+			<li>
+				<h5>How many books can I use for reference?</h5>
+			</li>
 			As many books as you have chosen for helping you animate that particular concept
-		<br><br>
-		<li><h5>Is this program only for students with a programming background?</h5></li>
+			<br><br>
+			<li>
+				<h5>Is this program only for students with a programming background?</h5>
+			</li>
 			No! Anyone with the required interest and knowledge sign up for contributing.
-		<br><br>
-		<li><h5>Should I email you the code once I’m done creating the videos?</h5></li>
-			No, it is best practice to upload your code on GitHub and mention the link to the code in the video outline once you are done creating the video.
-		<br><br>
-		<li><h5>I do not know GitHub. What should I do?</h5></li>
-		Please visit here to learn about <a href="https://git-scm.com/docs/gittutorial" target="_blank">Git</a> and <a href="https://guides.github.com/activities/hello-world/" target="_blank">Github</a>
-	</ul>
-	<br>
+			<br><br>
+			<li>
+				<h5>Should I email you the code once I’m done creating the videos?</h5>
+			</li>
+			No, it is best practice to upload your code on GitHub and mention the link to the code in the video outline
+			once you are done creating the video.
+			<br><br>
+			<li>
+				<h5>I do not know GitHub. What should I do?</h5>
+			</li>
+			Please visit here to learn about <a href="https://git-scm.com/docs/gittutorial" target="_blank">Git</a> and
+			<a href="https://guides.github.com/activities/hello-world/" target="_blank">Github</a>
+		</ul>
+		<br>
 
-	<h5>If you have any other queries, email us at <a href="mailto: animations@fossee.in">animations@fossee.in</a> </h2>
-</div>
+		<h5>If you have any other queries, email us at <a href="mailto: animations@fossee.in">animations@fossee.in</a>
+			</h2>
+	</div>
 </div>
 {% endblock %}
