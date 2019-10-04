@@ -2,7 +2,7 @@ from os import listdir, path, sep, makedirs, remove
 from .forms import (
     UserRegistrationForm, UserLoginForm,
     ProfileForm, AnimationProposal,
-    CommentForm, UploadAnimationForm
+    CommentForm, UploadAnimationForm,AnimationProposal_edit
 )
 from .models import (
     Profile, User, AnimationStats,
@@ -464,7 +464,7 @@ def edit_proposal(request, proposal_id=None):
     if is_email_checked(user) and user.is_authenticated():
         comment_form = CommentForm()
         proposal = Animation.objects.get(id=proposal_id)
-        proposal_form = AnimationProposal(instance=proposal)
+        proposal_form = AnimationProposal_edit(instance=proposal)
         upload_form = UploadAnimationForm()
         categories = Category.objects.all()
         video = AnimationStats.objects.filter(animation=proposal_id)
@@ -516,7 +516,7 @@ def edit_proposal(request, proposal_id=None):
                                proposal=proposal)
                 form_data.save()
                 return redirect('/edit_proposal/{}'.format(proposal_id))
-            proposal_form = AnimationProposal(request.POST, instance=proposal)
+            proposal_form = AnimationProposal_edit(request.POST, instance=proposal)
             if proposal_form.is_valid():
                 p_f = proposal_form.save(commit=False)
                 p_f.contributor = user

@@ -115,6 +115,13 @@ def validate_file_extension(value):
     if not ext.lower() in valid_extensions:
         raise ValidationError(u'Unsupported file extension.')
 
+def validate_img_extension(value):
+    import os
+    from django.core.exceptions import ValidationError
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.jpg','.jpeg','.png']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(u'Unsupported file extension.')
 
 class Profile(models.Model):
     """Profile for users(instructors and coordinators)"""
@@ -172,17 +179,25 @@ class Animation(models.Model):
     reviewer = models.ForeignKey(User, null=True, on_delete=models.CASCADE,
                                  related_name="%(app_label)s_%(class)s_related")
     outline = models.TextField()
-    # concepts = models.TextField()
-    # audience=models.TextField()
     status = models.CharField(max_length=255, choices=status)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.CharField(max_length=255, blank=True)
     created = models.DateTimeField(default=timezone.now)
     tags = TaggableManager()
     history = HistoricalRecords()
+    # modifications
+    concepts=models.TextField(null=True,blank=True)
+    audience=models.TextField(null=True,blank=True)
+    reference=models.TextField(null=True,blank=True)
+    tools=models.TextField(null=True,blank=True)
+    detaled_description=models.TextField(null=True,blank=True)
+    link=models.CharField(max_length=255, blank=True)
+    sketch=models.ImageField(null=True, blank=True, upload_to=attachments, validators=[validate_img_extension])
 
     def __str__(self):
         return u"{0} | {1}".format(self.title, self.status)
+
+
 
 
 class Comment(models.Model):

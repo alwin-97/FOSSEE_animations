@@ -55,7 +55,6 @@
                     <th>Created Date</th>
                     {% if request.user.profile.position == 'reviewer' %}
                         <th>Contributor Name</th>
-                        {#                        <th>Mail Status</th>#}
                     {% endif %}
                 </tr>
                 </thead>
@@ -71,15 +70,20 @@
                             <td><span class="text-info">{{ an.status }}</span></td>
                         {% endif %}
                         <td><span class="badge">{{ an.created }}</span></td>
-                        {% if request.user.profile.position == 'reviewer' %}
-                            <td>{{ an.contributor.get_full_name }}</td>
-                            {#                             <td>{{ an.contributor.get_full_name }}</td>#}
-                        {% endif %}
-                        <td><a href="{% url 'edit_proposal' an.id %}">
-                            <button type="button" class="btn btn-info"
-                                    id="btnblue">Edit
-                            </button>
-                        </a></td>
+                        <td>
+                            {% if request.user.profile.position == 'reviewer' %}
+                                {{ an.contributor.get_full_name }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if an.status == 'released' or request.user.profile.position == 'reviewer'%}
+                                <a href="{% url 'edit_proposal' an.id %}">
+                                    <button type="button" class="btn btn-info"
+                                            id="btnblue">Edit
+                                    </button>
+                                </a>
+                            {% endif %}
+                        </td>
                         {% if request.user.profile.position == 'reviewer' %}
                             <td><a href="{% url 'delete_proposal' an.id %}">
                                 <button type="button" class="btn btn-info" id="btnred">Delete</button>

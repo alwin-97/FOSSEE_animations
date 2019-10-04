@@ -261,10 +261,85 @@ class AnimationProposal(forms.ModelForm):
             'any other related information')
         }
 
+    class Meta:
+        model = Animation
+        widgets = {
+            'sketch': forms.FileInput(),
+        }
+        fields = ['category', 'subcategory', 'title', 'outline', 'tags']
+
+
+class AnimationProposal_edit(forms.ModelForm):
+    """Animation form """
+    required_css_class = 'required'
+    errorlist_css_class = 'errorlist'
+
+    def __init__(self, *args, **kwargs):
+        super(AnimationProposal_edit, self).__init__(*args, **kwargs)
+        self.fields['subcategory'].widget.attrs['placeholder'] = 'Eg: Quantum Mechanics, Topology'
+        # self.fields['outline'].widget.attrs['placeholder'] = 'NOTE: Do\
+        #  add info about prerequisites (if any), possible textbooks and \
+        #  any other related information'
+        self.fields['outline'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('NOTE: Do add info about prerequisites (if any), possible textbooks and '
+                            'any other related information')
+        }
+        self.fields['concepts'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('Which concept(s) do you want to animate?'
+                            'Example: Animation of how data flows in Ring Topology')
+        }
+        self.fields['audience'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('Who would be the target audience for your video?\n'
+                            'Example: High School Students, Mechanical Engineers, etc.')
+        }
+
+        self.fields['reference'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('Please try to be as specific as possible. For example,\n'
+                            'Book used: Linear Algebra.\n'
+                            'Author: Kenneth Hoffman, Ray Kunze\n'
+                            'Edition: Second\n'
+                            'Chapter: 2 ; Page: 40')
+        }
+        self.fields['tools'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('What all tools would you be using for animation?\n'
+                            'Example: manim, blender, mayavi, mathbox, etc')
+        }
+        self.fields['detaled_description'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('Give a detailed description of your animation')
+        }
+        self.fields['link'].widget.attrs = {
+            'id': 'custom_editor',
+            'rows': 10,
+            'cols': 50,
+            'placeholder': ('Along with the video you will have to submit the source code github link below.\n')
+        }
+        self.fields['sketch'].label = "Sketch(.jpeg/.jpg only)"
 
     class Meta:
         model = Animation
-        fields = ['category', 'subcategory', 'title', 'outline', 'tags']
+        widgets = {
+            'sketch': forms.FileInput(),
+        }
+        fields = ['category', 'subcategory', 'title', 'outline', 'tags', 'concepts', 'audience', 'reference', 'tools',
+                  'detaled_description', 'link', 'sketch']
 
 
 class CommentForm(forms.ModelForm):
