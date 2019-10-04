@@ -601,6 +601,31 @@ def search(request):
     return render(request, 'fossee_manim/search_results.html',
                   {'s_result': anime_list, 'categories': categories})
 
+# search results for proposal
+def search_proposal(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        word = request.POST.get('sbox')
+        animations = Animation.objects.filter(title=word)
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
 
 @login_required
 def upload_animation(request, proposal_id=None):

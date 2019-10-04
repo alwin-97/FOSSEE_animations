@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^sortproposal_rejected/$',views.sortproposal_rejected,name='sortproposal_rejected'),
     url(r'^sortproposal_changes/',views.sortproposal_changes,name='sortproposal_changes'),
     url(r'^sortproposal_pending/$',views.sortproposal_pending,name='sortproposal_pending'),
+    url(r'^search_proposal/$', views.search_proposal, name='search_proposal'),
 ]
 
 urlpatterns += static(
