@@ -43,6 +43,7 @@ migrations/
 
 #VS code
 .vscode/
+.idea/
 
 index_clutter.html
 base_clutter.html

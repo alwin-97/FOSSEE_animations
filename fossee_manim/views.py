@@ -2,7 +2,7 @@ from os import listdir, path, sep, makedirs, remove
 from .forms import (
     UserRegistrationForm, UserLoginForm,
     ProfileForm, AnimationProposal,
-    CommentForm, UploadAnimationForm,AnimationProposal_edit
+    CommentForm, UploadAnimationForm, AnimationProposal_edit
 )
 from .models import (
     Profile, User, AnimationStats,
@@ -334,6 +334,8 @@ def proposal_status(request):
     else:
         return redirect('/login/')
 
+
+# this method return the proposal in the status of released
 @login_required
 def sortproposal_released(request):
     user = request.user
@@ -341,8 +343,11 @@ def sortproposal_released(request):
         profile = Profile.objects.get(user_id=user)
         categories = Category.objects.all()
         if profile.position == 'contributor':
-            animations = Animation.objects.filter(contributor_id=user,status='released').order_by('-created')
+            # filtering with the proposal status
+            animations = Animation.objects.filter(contributor_id=user,
+                status='released').order_by('-created')
         else:
+            # filtering with the proposal status
             animations = Animation.objects.filter(status='released').order_by('-created')
             # print(animations)
 
@@ -365,6 +370,8 @@ def sortproposal_released(request):
     else:
         return redirect('/login/')
 
+
+# this method return the proposal in the status of rejected
 @login_required
 def sortproposal_rejected(request):
     user = request.user
@@ -372,8 +379,11 @@ def sortproposal_rejected(request):
         profile = Profile.objects.get(user_id=user)
         categories = Category.objects.all()
         if profile.position == 'contributor':
-            animations = Animation.objects.filter(contributor_id=user,status='rejected').order_by('-created')
+            # filtering with the proposal status
+            animations = Animation.objects.filter(contributor_id=user,
+                status='rejected').order_by('-created')
         else:
+            # filtering with the proposal status
             animations = Animation.objects.filter(status='rejected').order_by('-created')
             # print(animations)
 
@@ -396,6 +406,8 @@ def sortproposal_rejected(request):
     else:
         return redirect('/login/')
 
+
+# this method return the proposal in the status of changes
 @login_required
 def sortproposal_changes(request):
     user = request.user
@@ -403,8 +415,11 @@ def sortproposal_changes(request):
         profile = Profile.objects.get(user_id=user)
         categories = Category.objects.all()
         if profile.position == 'contributor':
-            animations = Animation.objects.filter(contributor_id=user,status='changes').order_by('-created')
+            # filtering with the proposal status
+            animations = Animation.objects.filter(contributor_id=user,
+                status='changes').order_by('-created')
         else:
+            # filtering with the proposal status
             animations = Animation.objects.filter(status='changes').order_by('-created')
             # print(animations)
 
@@ -427,6 +442,8 @@ def sortproposal_changes(request):
     else:
         return redirect('/login/')
 
+
+# this method return the proposal in the status of pending
 @login_required
 def sortproposal_pending(request):
     user = request.user
@@ -434,8 +451,11 @@ def sortproposal_pending(request):
         profile = Profile.objects.get(user_id=user)
         categories = Category.objects.all()
         if profile.position == 'contributor':
-            animations = Animation.objects.filter(contributor_id=user,status='pending').order_by('-created')
+            # filtering with the proposal status
+            animations = Animation.objects.filter(contributor_id=user,
+                status='pending').order_by('-created')
         else:
+            # filtering with the proposal status
             animations = Animation.objects.filter(status='pending').order_by('-created')
             # print(animations)
 
@@ -551,6 +571,7 @@ def edit_proposal(request, proposal_id=None):
                    'msg': msg})
 
 
+# this method is used to return the details the proposal selected to delete
 @login_required
 def delete_proposal(request, proposal_id=None):
     user = request.user
@@ -562,12 +583,15 @@ def delete_proposal(request, proposal_id=None):
         return redirect('/register/')
 
 
+# this method is used to delete the selected proposal by the reviever
 @login_required
 def delete_proposal_info(request, proposal_id=None):
     user = request.user
     if is_email_checked(user) and user.is_authenticated():
+        # delete the selected proposal
         proposal = Animation.objects.get(id=proposal_id)
         proposal.delete()
+        # loading the proposal page to redirect after deleting one proposal
         profile = Profile.objects.get(user_id=user)
         categories = Category.objects.all()
         if profile.position == 'contributor':
