@@ -3,7 +3,7 @@ from .forms import (
     UserRegistrationForm, UserLoginForm,
     ProfileForm, AnimationProposal,
     CommentForm, UploadAnimationForm,
-    AnimationProposal_edit
+    AnimationProposal_edit,
 )
 from .models import (
     Profile, User, AnimationStats,
