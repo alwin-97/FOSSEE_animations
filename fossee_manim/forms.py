@@ -1,9 +1,11 @@
 from django import forms
 from django.utils import timezone
+from taggit.forms import TagWidget
+
 from .models import (
-                    Profile, User, Animation,
-                    Comment, AnimationStats
-                    )
+    Profile, User, Animation,
+    Comment, AnimationStats
+)
 from string import punctuation, digits
 try:
     from string import letters
@@ -21,7 +23,7 @@ PWD_CHARS = letters + punctuation + digits
 position_choices = (
     ("contributor", "Contributor"),
     ("reviewer", "Reviewer")
-    )
+)
 
 department_choices = (
     ("computer", "Dept. of Computer Science/Engg."),
@@ -36,7 +38,7 @@ department_choices = (
     ("electronics", "Dept. of Electronics"),
     ("energy science and engineering", "Dept. of Energy Science and Engg"),
     ("others", "Others")
-    )
+)
 
 title = (
     ("Professor", "Prof."),
@@ -47,7 +49,7 @@ title = (
     ("Mr", "Mr."),
     ("Mrs", "Mrs."),
     ("Miss", "Ms."),
-    )
+)
 
 source = (
     ("FOSSEE Email", "FOSSEE Email"),
@@ -56,46 +58,46 @@ source = (
     ("Social Media", "Social Media"),
     ("From other College", "From other College"),
     ("others", "Others")
-    )
+)
 
 states = (
-    ("IN-AP",	"Andhra Pradesh"),
-    ("IN-AR",	"Arunachal Pradesh"),
-    ("IN-AS",	"Assam"),
-    ("IN-BR",	"Bihar"),
-    ("IN-CT",	"Chhattisgarh"),
-    ("IN-GA",	"Goa"),
-    ("IN-GJ",	"Gujarat"),
-    ("IN-HR",	"Haryana"),
-    ("IN-HP",	"Himachal Pradesh"),
-    ("IN-JK",	"Jammu and Kashmir"),
-    ("IN-JH",	"Jharkhand"),
-    ("IN-KA",	"Karnataka"),
-    ("IN-KL",	"Kerala"),
-    ("IN-MP",	"Madhya Pradesh"),
-    ("IN-MH",	"Maharashtra"),
-    ("IN-MN",	"Manipur"),
-    ("IN-ML",	"Meghalaya"),
-    ("IN-MZ",	"Mizoram"),
-    ("IN-NL",	"Nagaland"),
-    ("IN-OR",	"Odisha"),
-    ("IN-PB",	"Punjab"),
-    ("IN-RJ",	"Rajasthan"),
-    ("IN-SK",	"Sikkim"),
-    ("IN-TN",	"Tamil Nadu"),
-    ("IN-TG",	"Telangana"),
-    ("IN-TR",	"Tripura"),
-    ("IN-UT",	"Uttarakhand"),
-    ("IN-UP",	"Uttar Pradesh"),
-    ("IN-WB",	"West Bengal"),
-    ("IN-AN",	"Andaman and Nicobar Islands"),
-    ("IN-CH",	"Chandigarh"),
-    ("IN-DN",	"Dadra and Nagar Haveli"),
-    ("IN-DD",	"Daman and Diu"),
-    ("IN-DL",	"Delhi"),
-    ("IN-LD",	"Lakshadweep"),
-    ("IN-PY",	"Puducherry")
-    )
+    ("IN-AP", "Andhra Pradesh"),
+    ("IN-AR", "Arunachal Pradesh"),
+    ("IN-AS", "Assam"),
+    ("IN-BR", "Bihar"),
+    ("IN-CT", "Chhattisgarh"),
+    ("IN-GA", "Goa"),
+    ("IN-GJ", "Gujarat"),
+    ("IN-HR", "Haryana"),
+    ("IN-HP", "Himachal Pradesh"),
+    ("IN-JK", "Jammu and Kashmir"),
+    ("IN-JH", "Jharkhand"),
+    ("IN-KA", "Karnataka"),
+    ("IN-KL", "Kerala"),
+    ("IN-MP", "Madhya Pradesh"),
+    ("IN-MH", "Maharashtra"),
+    ("IN-MN", "Manipur"),
+    ("IN-ML", "Meghalaya"),
+    ("IN-MZ", "Mizoram"),
+    ("IN-NL", "Nagaland"),
+    ("IN-OR", "Odisha"),
+    ("IN-PB", "Punjab"),
+    ("IN-RJ", "Rajasthan"),
+    ("IN-SK", "Sikkim"),
+    ("IN-TN", "Tamil Nadu"),
+    ("IN-TG", "Telangana"),
+    ("IN-TR", "Tripura"),
+    ("IN-UT", "Uttarakhand"),
+    ("IN-UP", "Uttar Pradesh"),
+    ("IN-WB", "West Bengal"),
+    ("IN-AN", "Andaman and Nicobar Islands"),
+    ("IN-CH", "Chandigarh"),
+    ("IN-DN", "Dadra and Nagar Haveli"),
+    ("IN-DD", "Daman and Diu"),
+    ("IN-DL", "Delhi"),
+    ("IN-LD", "Lakshadweep"),
+    ("IN-PY", "Puducherry")
+)
 
 
 def check_upper(uname):
@@ -111,7 +113,8 @@ class UserRegistrationForm(forms.Form):
     a new user to the system"""
     required_css_class = 'required'
     errorlist_css_class = 'errorlist'
-    username = forms.CharField(max_length=32, help_text='''lowercase, letters, digits,
+    username = forms.CharField(
+        max_length=32, help_text='''lowercase, letters, digits,
                                period and underscore only.''')
     email = forms.EmailField()
     password = forms.CharField(max_length=32, widget=forms.PasswordInput())
@@ -132,7 +135,9 @@ class UserRegistrationForm(forms.Form):
     department = forms.ChoiceField(help_text='Department you work/study',
                                    choices=department_choices)
     location = forms.CharField(max_length=255, help_text="Place/City")
-    pincode = forms.RegexField(regex=r'^.{6}$', error_messages={'invalid': "Please enter valid PINCODE"})
+    pincode = forms.RegexField(
+        regex=r'^.{6}$', error_messages={
+            'invalid': "Please enter valid PINCODE"})
     state = forms.ChoiceField(choices=states)
     how_did_you_hear_about_us = forms.ChoiceField(choices=source)
 
@@ -213,11 +218,11 @@ class UserLoginForm(forms.Form):
         super(UserLoginForm, self).clean()
         try:
             u_name, pwd = self.cleaned_data["username"],\
-                          self.cleaned_data["password"]
+                self.cleaned_data["password"]
             user = authenticate(username=u_name, password=pwd)
         except Exception:
-            raise forms.ValidationError\
-                        ("Username and/or Password is not entered")
+            raise forms.ValidationError(
+                "Username and/or Password is not entered")
         if not user:
             raise forms.ValidationError("Invalid username/password")
         return user
@@ -229,7 +234,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'institute', 'department',
-                ]
+                  ]
 
     first_name = forms.CharField(max_length=32)
     last_name = forms.CharField(max_length=32)
@@ -253,18 +258,18 @@ class AnimationProposal(forms.ModelForm):
         # self.fields['outline'].widget.attrs['placeholder'] = 'NOTE: Do\
         #  add info about prerequisites (if any), possible textbooks and \
         #  any other related information'
-        self.fields['outline'].widget.attrs={
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('NOTE: Do add info about prerequisites (if any), possible textbooks and '
-            'any other related information')
-        }
+        self.fields['outline'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'NOTE: Do add info about prerequisites (if any), possible textbooks and '
+                'any other related information')}
 
 
     class Meta:
         model = Animation
         fields = ['category', 'subcategory', 'title', 'outline', 'tags']
+        widgets = {
+            'tags': TagWidget(),
+        }
 
 
 class CommentForm(forms.ModelForm):

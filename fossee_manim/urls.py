@@ -26,12 +26,12 @@ urlpatterns = [
     url(r'^faqs/$', views.faqs, name='faqs'),
     url(r'^search_category/(?P<cat>.+)$', views.search_category,
         name='search_category'),
-    url(r'^about/$',views.about, name='about'),
-    url(r'^outreach/$',views.outreach, name='outreach'),
-    url(r'^library/$',views.library, name='library'),
-    url(r'^libraryMath/$',views.libraryMath, name='libraryMath'),
-    url(r'^libraryPhys/$',views.libraryPhys, name='libraryPhys'),
-    url(r'^libraryCS/$',views.libraryCS, name='libraryCS'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^outreach/$', views.outreach, name='outreach'),
+    url(r'^library/$', views.library, name='library'),
+    url(r'^libraryMath/$', views.libraryMath, name='libraryMath'),
+    url(r'^libraryPhys/$', views.libraryPhys, name='libraryPhys'),
+    url(r'^libraryCS/$', views.libraryCS, name='libraryCS'),
     url(r'^explore/(?P<category>.+)$', views.explore,
         name='explore'),
     url(r'^delete_proposal/([1-9][0-9]*)$',views.delete_proposal,name='delete_proposal'),
@@ -39,6 +39,6 @@ urlpatterns = [
 ]
 
 urlpatterns += static(
-                    settings.MEDIA_URL,
-                    document_root=settings.MEDIA_ROOT
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
 )
