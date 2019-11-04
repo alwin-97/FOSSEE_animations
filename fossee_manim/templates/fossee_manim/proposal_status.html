@@ -94,7 +94,7 @@
                             {% endif %}
                         </td>
                         {% if request.user.profile.position == 'reviewer' %}
-                            <td><a href="{% url 'delete_proposal' an.id %}">
+                            <td><a href="{% url 'show_proposal_detail' an.id %}">
                                 <button type="button" class="btn btn-info" id="btnred">Delete</button>
                             </a></td>
                         {% endif %}

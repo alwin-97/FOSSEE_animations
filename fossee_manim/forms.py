@@ -1,9 +1,9 @@
 from django import forms
 from django.utils import timezone
 from .models import (
-                    Profile, User, Animation,
-                    Comment, AnimationStats
-                    )
+    Profile, User, Animation,
+    Comment, AnimationStats
+)
 from string import punctuation, digits
 try:
     from string import letters
@@ -21,7 +21,7 @@ PWD_CHARS = letters + punctuation + digits
 position_choices = (
     ("contributor", "Contributor"),
     ("reviewer", "Reviewer")
-    )
+)
 
 department_choices = (
     ("computer", "Dept. of Computer Science/Engg."),
@@ -36,7 +36,7 @@ department_choices = (
     ("electronics", "Dept. of Electronics"),
     ("energy science and engineering", "Dept. of Energy Science and Engg"),
     ("others", "Others")
-    )
+)
 
 title = (
     ("Professor", "Prof."),
@@ -47,7 +47,7 @@ title = (
     ("Mr", "Mr."),
     ("Mrs", "Mrs."),
     ("Miss", "Ms."),
-    )
+)
 
 source = (
     ("FOSSEE Email", "FOSSEE Email"),
@@ -56,46 +56,46 @@ source = (
     ("Social Media", "Social Media"),
     ("From other College", "From other College"),
     ("others", "Others")
-    )
+)
 
 states = (
-    ("IN-AP",	"Andhra Pradesh"),
-    ("IN-AR",	"Arunachal Pradesh"),
-    ("IN-AS",	"Assam"),
-    ("IN-BR",	"Bihar"),
-    ("IN-CT",	"Chhattisgarh"),
-    ("IN-GA",	"Goa"),
-    ("IN-GJ",	"Gujarat"),
-    ("IN-HR",	"Haryana"),
-    ("IN-HP",	"Himachal Pradesh"),
-    ("IN-JK",	"Jammu and Kashmir"),
-    ("IN-JH",	"Jharkhand"),
-    ("IN-KA",	"Karnataka"),
-    ("IN-KL",	"Kerala"),
-    ("IN-MP",	"Madhya Pradesh"),
-    ("IN-MH",	"Maharashtra"),
-    ("IN-MN",	"Manipur"),
-    ("IN-ML",	"Meghalaya"),
-    ("IN-MZ",	"Mizoram"),
-    ("IN-NL",	"Nagaland"),
-    ("IN-OR",	"Odisha"),
-    ("IN-PB",	"Punjab"),
-    ("IN-RJ",	"Rajasthan"),
-    ("IN-SK",	"Sikkim"),
-    ("IN-TN",	"Tamil Nadu"),
-    ("IN-TG",	"Telangana"),
-    ("IN-TR",	"Tripura"),
-    ("IN-UT",	"Uttarakhand"),
-    ("IN-UP",	"Uttar Pradesh"),
-    ("IN-WB",	"West Bengal"),
-    ("IN-AN",	"Andaman and Nicobar Islands"),
-    ("IN-CH",	"Chandigarh"),
-    ("IN-DN",	"Dadra and Nagar Haveli"),
-    ("IN-DD",	"Daman and Diu"),
-    ("IN-DL",	"Delhi"),
-    ("IN-LD",	"Lakshadweep"),
-    ("IN-PY",	"Puducherry")
-    )
+    ("IN-AP", "Andhra Pradesh"),
+    ("IN-AR", "Arunachal Pradesh"),
+    ("IN-AS", "Assam"),
+    ("IN-BR", "Bihar"),
+    ("IN-CT", "Chhattisgarh"),
+    ("IN-GA", "Goa"),
+    ("IN-GJ", "Gujarat"),
+    ("IN-HR", "Haryana"),
+    ("IN-HP", "Himachal Pradesh"),
+    ("IN-JK", "Jammu and Kashmir"),
+    ("IN-JH", "Jharkhand"),
+    ("IN-KA", "Karnataka"),
+    ("IN-KL", "Kerala"),
+    ("IN-MP", "Madhya Pradesh"),
+    ("IN-MH", "Maharashtra"),
+    ("IN-MN", "Manipur"),
+    ("IN-ML", "Meghalaya"),
+    ("IN-MZ", "Mizoram"),
+    ("IN-NL", "Nagaland"),
+    ("IN-OR", "Odisha"),
+    ("IN-PB", "Punjab"),
+    ("IN-RJ", "Rajasthan"),
+    ("IN-SK", "Sikkim"),
+    ("IN-TN", "Tamil Nadu"),
+    ("IN-TG", "Telangana"),
+    ("IN-TR", "Tripura"),
+    ("IN-UT", "Uttarakhand"),
+    ("IN-UP", "Uttar Pradesh"),
+    ("IN-WB", "West Bengal"),
+    ("IN-AN", "Andaman and Nicobar Islands"),
+    ("IN-CH", "Chandigarh"),
+    ("IN-DN", "Dadra and Nagar Haveli"),
+    ("IN-DD", "Daman and Diu"),
+    ("IN-DL", "Delhi"),
+    ("IN-LD", "Lakshadweep"),
+    ("IN-PY", "Puducherry")
+)
 
 
 def check_upper(uname):
@@ -111,7 +111,8 @@ class UserRegistrationForm(forms.Form):
     a new user to the system"""
     required_css_class = 'required'
     errorlist_css_class = 'errorlist'
-    username = forms.CharField(max_length=32, help_text='''lowercase, letters, digits,
+    username = forms.CharField(
+        max_length=32, help_text='''lowercase, letters, digits,
                                period and underscore only.''')
     email = forms.EmailField()
     password = forms.CharField(max_length=32, widget=forms.PasswordInput())
@@ -132,7 +133,9 @@ class UserRegistrationForm(forms.Form):
     department = forms.ChoiceField(help_text='Department you work/study',
                                    choices=department_choices)
     location = forms.CharField(max_length=255, help_text="Place/City")
-    pincode = forms.RegexField(regex=r'^.{6}$', error_messages={'invalid': "Please enter valid PINCODE"})
+    pincode = forms.RegexField(
+        regex=r'^.{6}$', error_messages={
+            'invalid': "Please enter valid PINCODE"})
     state = forms.ChoiceField(choices=states)
     how_did_you_hear_about_us = forms.ChoiceField(choices=source)
 
@@ -213,11 +216,11 @@ class UserLoginForm(forms.Form):
         super(UserLoginForm, self).clean()
         try:
             u_name, pwd = self.cleaned_data["username"],\
-                          self.cleaned_data["password"]
+                self.cleaned_data["password"]
             user = authenticate(username=u_name, password=pwd)
         except Exception:
-            raise forms.ValidationError\
-                        ("Username and/or Password is not entered")
+            raise forms.ValidationError(
+                "Username and/or Password is not entered")
         if not user:
             raise forms.ValidationError("Invalid username/password")
         return user
@@ -229,7 +232,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['first_name', 'last_name', 'institute', 'department',
-                ]
+                  ]
 
     first_name = forms.CharField(max_length=32)
     last_name = forms.CharField(max_length=32)
@@ -253,13 +256,10 @@ class AnimationProposal(forms.ModelForm):
         # self.fields['outline'].widget.attrs['placeholder'] = 'NOTE: Do\
         #  add info about prerequisites (if any), possible textbooks and \
         #  any other related information'
-        self.fields['outline'].widget.attrs={
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('NOTE: Do add info about prerequisites (if any), possible textbooks and '
-            'any other related information')
-        }
+        self.fields['outline'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'NOTE: Do add info about prerequisites (if any), possible textbooks and '
+                'any other related information')}
 
     class Meta:
         model = Animation
@@ -277,58 +277,101 @@ class AnimationProposal_edit(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AnimationProposal_edit, self).__init__(*args, **kwargs)
         self.fields['subcategory'].widget.attrs['placeholder'] = 'Eg: Quantum Mechanics, Topology'
-
+        # self.fields['outline'].widget.attrs['placeholder'] = 'NOTE: Do\
+        #  add info about prerequisites (if any), possible textbooks and \
+        #  any other related information'
         self.fields['outline'].widget.attrs = {
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('NOTE: Do add info about prerequisites (if any), possible textbooks and '
-                            'any other related information')
-        }
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'NOTE: Do add info about prerequisites (if any), possible textbooks and '
+                'any other related information')}
         self.fields['concepts'].widget.attrs = {
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('Which concept(s) do you want to animate?'
-                            'Example: Animation of how data flows in Ring Topology')
-        }
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'Which concept(s) do you want to animate?'
+                'Example: Animation of how data flows in Ring Topology')}
         self.fields['audience'].widget.attrs = {
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('Who would be the target audience for your video?\n'
-                            'Example: High School Students, Mechanical Engineers, etc.')
-        }
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'Who would be the target audience for your video?\n'
+                'Example: High School Students, Mechanical Engineers, etc.')}
 
         self.fields['reference'].widget.attrs = {
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('Please try to be as specific as possible. For example,\n'
-                            'Book used: Linear Algebra.\n'
-                            'Author: Kenneth Hoffman, Ray Kunze\n'
-                            'Edition: Second\n'
-                            'Chapter: 2 ; Page: 40')
-        }
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'Please try to be as specific as possible. For example,\n'
+                'Book used: Linear Algebra.\n'
+                'Author: Kenneth Hoffman, Ray Kunze\n'
+                'Edition: Second\n'
+                'Chapter: 2 ; Page: 40')}
         self.fields['tools'].widget.attrs = {
-            'id': 'custom_editor',
-            'rows': 10,
-            'cols': 50,
-            'placeholder': ('What all tools would you be using for animation?\n'
-                            'Example: manim, blender, mayavi, mathbox, etc')
-        }
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'What all tools would you be using for animation?\n'
+                'Example: manim, blender, mayavi, mathbox, etc')}
         self.fields['detaled_description'].widget.attrs = {
             'id': 'custom_editor',
             'rows': 10,
             'cols': 50,
             'placeholder': ('Give a detailed description of your animation')
         }
-        self.fields['link'].widget.attrs = {
+        self.fields['link'].widget.attrs = {'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+            'Along with the video you will have to submit the source code github link below.\n')}
+        self.fields['sketch'].label = "Sketch(.jpeg/.jpg only)"
+
+    class Meta:
+        model = Animation
+        widgets = {'sketch': forms.FileInput(), }
+        fields = [
+            'category',
+            'subcategory',
+            'title',
+            'outline',
+            'tags',
+            'concepts',
+            'audience',
+            'reference',
+            'tools',
+            'detaled_description',
+            'link',
+            'sketch']
+
+
+class AnimationProposal_edit(forms.ModelForm):
+    """Animation form """
+    required_css_class = 'required'
+    errorlist_css_class = 'errorlist'
+
+    def __init__(self, *args, **kwargs):
+        super(AnimationProposal_edit, self).__init__(*args, **kwargs)
+        self.fields['subcategory'].widget.attrs['placeholder'] = 'Eg: Quantum Mechanics, Topology'
+        self.fields['outline'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'NOTE: Do add info about prerequisites (if any), possible textbooks and '
+                'any other related information')}
+        self.fields['concepts'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'Which concept(s) do you want to animate?'
+                'Example: Animation of how data flows in Ring Topology')}
+        self.fields['audience'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'Who would be the target audience for your video?\n'
+                'Example: High School Students, Mechanical Engineers, etc.')}
+
+        self.fields['reference'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'Please try to be as specific as possible. For example,\n'
+                'Book used: Linear Algebra.\n'
+                'Author: Kenneth Hoffman, Ray Kunze\n'
+                'Edition: Second\n'
+                'Chapter: 2 ; Page : 40')}
+        self.fields['tools'].widget.attrs = {
+            'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+                'What all tools would you be using for animation?\n'
+                'Example: manim, blender, mayavi, mathbox, etc')}
+        self.fields['detaled_description'].widget.attrs = {
             'id': 'custom_editor',
             'rows': 10,
             'cols': 50,
-            'placeholder': ('Along with the video you will have to submit the source code github link below.\n')
+            'placeholder': ('Give a detailed description of your animation')
         }
+        self.fields['link'].widget.attrs = {'id': 'custom_editor', 'rows': 10, 'cols': 50, 'placeholder': (
+            'Along with the video you will have to submit the source code github link below.\n')}
         self.fields['sketch'].label = "Sketch(.jpeg/.jpg only)"
 
     class Meta:
@@ -336,8 +379,19 @@ class AnimationProposal_edit(forms.ModelForm):
         widgets = {
             'sketch': forms.FileInput(),
         }
-        fields = ['category', 'subcategory', 'title', 'outline', 'tags', 'concepts', 'audience', 'reference', 'tools',
-                  'detaled_description', 'link', 'sketch']
+        fields = [
+            'category',
+            'subcategory',
+            'title',
+            'outline',
+            'tags',
+            'concepts',
+            'audience',
+            'reference',
+            'tools',
+            'detaled_description',
+            'link',
+            'sketch']
 
 
 class CommentForm(forms.ModelForm):
@@ -356,6 +410,7 @@ class CommentForm(forms.ModelForm):
             'comments': forms.CharField(),
         }
 
+
 class UploadAnimationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -365,6 +420,5 @@ class UploadAnimationForm(forms.ModelForm):
     class Meta:
         model = AnimationStats
         exclude = ['animation', 'views', 'like', 'dislike', 'thumbnail']
-        widgets = {
-            'video_path': forms.FileInput(),
-        }
+        widgets = {'video_path': forms.FileInput(),}
+
