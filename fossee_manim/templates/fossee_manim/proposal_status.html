@@ -85,13 +85,11 @@
                             {% endif %}
                         </td>
                         <td>
-                            {% if an.status == 'released' or an.status == 'changes' or request.user.profile.position == 'reviewer'%}
                                 <a href="{% url 'edit_proposal' an.id %}">
                                     <button type="button" class="btn btn-info"
                                             id="btnblue">Edit
                                     </button>
                                 </a>
-                            {% endif %}
                         </td>
                         {% if request.user.profile.position == 'reviewer' %}
                             <td><a href="{% url 'show_proposal_detail' an.id %}">
