@@ -1,62 +1,64 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		FOSSEE Animations | Topic Library
-	{% endblock %}
+{% block title %}
+FOSSEE Animations | Topic Library
+{% endblock %}
 
-  {% block content %}
-  <div class="container-fluid jumbotron" align = "justify" style="padding: 50px; background-color: transparent;">
-		<center><h2>Library of Topics</h2></center>
-		<div class="container" style= "font-family: 'Lato', sans-serif; background-color: transparent;">
-			<center style= "color: #555555;">
-			Muddled about what you could possibly animate? <br>
-			You can pick up topics from the lists below! <br>
-			<!-- We like to call it "<i>low-hanging fruit</i>". -->
-			</center>
-      <hr>
-			<br>
-      <div class="row">
-        <!-- Math Category -->
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-              <a>
-               <img class="card-img-top" alt="Category Thumbnail">
-              </a>
-              <div class="card-body" align= "center">
-                <a href="{% url 'libraryMath' %}">
-                  <h4 class="card-text" style="color: #157b80;">Mathematics</h4>
-                </a>
-              </div>
+{% block content %}
+<div class="container-fluid jumbotron" align="justify" style="padding: 50px; background-color: transparent;">
+  <center>
+    <h2>Library of Topics</h2>
+  </center>
+  <div class="container" style="font-family: 'Lato', sans-serif; background-color: transparent;">
+    <center style="color: #555555;">
+      Muddled about what you could possibly animate? <br>
+      You can pick up topics from the lists below! <br>
+      <!-- We like to call it "<i>low-hanging fruit</i>". -->
+    </center>
+    <hr>
+    <br>
+    <div class="row">
+      <!-- Math Category -->
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <a>
+            <img class="card-img-top" alt="Category Thumbnail">
+          </a>
+          <div class="card-body" align="center">
+            <a href="{% url 'libraryMath' %}">
+              <h4 class="card-text" style="color: #157b80;">Mathematics</h4>
+            </a>
           </div>
-         </div>
-        <!-- Physics Category -->
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-              <a>
-               <img class="card-img-top" alt="Category Thumbnail">
-              </a>
-              <div class="card-body" align= "center">
-                <a href="{% url 'libraryPhys' %}">
-                  <h4 class="card-text" style="color: #157b80;">Physics</h4>
-                </a>
-              </div>
-          </div>
-         </div>
-        <!-- CS Category -->
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-              <a>
-               <img class="card-img-top" alt="Category Thumbnail">
-              </a>
-              <div class="card-body" align= "center">
-                <a href="{% url 'libraryCS' %}">
-                  <h4 class="card-text" style="color: #157b80;">Computer Science</h4>
-                </a>
-              </div>
-          </div>
-         </div>
-        <!-- end of library -->
+        </div>
       </div>
-		</div>
+      <!-- Physics Category -->
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <a>
+            <img class="card-img-top" alt="Category Thumbnail">
+          </a>
+          <div class="card-body" align="center">
+            <a href="{% url 'libraryPhys' %}">
+              <h4 class="card-text" style="color: #157b80;">Physics</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- CS Category -->
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <a>
+            <img class="card-img-top" alt="Category Thumbnail">
+          </a>
+          <div class="card-body" align="center">
+            <a href="{% url 'libraryCS' %}">
+              <h4 class="card-text" style="color: #157b80;">Computer Science</h4>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- end of library -->
+    </div>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}

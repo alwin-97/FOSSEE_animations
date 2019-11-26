@@ -1,14 +1,15 @@
 from os import listdir, path, sep, makedirs, remove
 from .forms import (
-            UserRegistrationForm, UserLoginForm,
-            ProfileForm, AnimationProposal,
-            CommentForm, UploadAnimationForm
-            )
+    UserRegistrationForm, UserLoginForm,
+    ProfileForm, AnimationProposal,
+    CommentForm, UploadAnimationForm,
+    AnimationProposal_edit,
+)
 from .models import (
-            Profile, User, AnimationStats,
-            has_profile, Animation, Comment,
-            Category
-            )
+    Profile, User, AnimationStats,
+    has_profile, Animation, Comment,
+    Category
+)
 from datetime import datetime, date
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -28,43 +29,50 @@ from .send_mails import send_email
 import datetime as dt
 import logging.config
 import shutil
+
 try:
     from StringIO import StringIO as string_io
 except ImportError:
     from io import BytesIO as string_io
 
 __author__ = "Akshen Doke"
-__credits__ = ["Prabhu Ramachandran", "Aditya P.", "KhushalSingh Rajput",
-                "Prathamesh Salunke", "Purusharth Saxsena", "Sharanya Achut", "Ankit Javalkar"
-                ]
+__credits__ = [
+    "Prabhu Ramachandran",
+    "Aditya P.",
+    "KhushalSingh Rajput",
+    "Prathamesh Salunke",
+    "Purusharth Saxsena",
+    "Sharanya Achut",
+    "Ankit Javalkar"]
+
 
 def makepath(proposal_data, reject=None):
     if not path.exists(path.join(settings.MEDIA_ROOT,
-                       proposal_data.category.name)):
+                                 proposal_data.category.name)):
         makedirs(path.join(settings.MEDIA_ROOT,
-                 proposal_data.category.name))
+                           proposal_data.category.name))
 
     if reject:
         try:
             shutil.rmtree(path.join(
-                     settings.MEDIA_ROOT, proposal_data.category.name,
-                     proposal_data.title.replace(" ", "_")
-                    ))
-        except:
+                settings.MEDIA_ROOT, proposal_data.category.name,
+                proposal_data.title.replace(" ", "_")
+            ))
+        except BaseException:
             logging.info("Proposal rejected")
-
 
     else:
         makedirs(path.join(settings.MEDIA_ROOT, proposal_data.category.name,
-                 proposal_data.title.replace(" ", "_")
-                 ))
+                           proposal_data.title.replace(" ", "_")
+                           ))
 
 
 def check_repo(link):
     try:
         return (get(link).status_code == 200)
-    except:
+    except BaseException:
         return False
+
 
 def is_email_checked(user):
     if hasattr(user, 'profile'):
@@ -85,7 +93,9 @@ def index(request):
     categories = Category.objects.all()
     if user.is_authenticated() and is_email_checked(user):
         return redirect('/proposal_status/')
-    return render(request, "fossee_manim/index.html", {"categories": categories})
+    return render(request,
+                  "fossee_manim/index.html",
+                  {"categories": categories})
 
 
 def is_reviewer(user):
@@ -116,8 +126,8 @@ def user_login(request):
             return render(request, 'fossee_manim/login.html', {"form": form})
     else:
         form = UserLoginForm()
-        return render(request, 'fossee_manim/login.html', {"form": form,
-                        'categories': categories })
+        return render(request, 'fossee_manim/login.html',
+                      {"form": form, 'categories': categories})
 
 
 def user_logout(request):
@@ -125,7 +135,7 @@ def user_logout(request):
     categories = Category.objects.all()
     logout(request)
     return render(request, 'fossee_manim/logout.html',
-                {'categories': categories })
+                  {'categories': categories})
 
 
 def activate_user(request, key=None):
@@ -133,25 +143,25 @@ def activate_user(request, key=None):
     if is_superuser(user):
         return redirect("/admin")
     if key is None:
-        if user.is_authenticated() and user.profile.is_email_verified==0 and \
-        timezone.now() > user.profile.key_expiry_time:
+        if user.is_authenticated() and user.profile.is_email_verified == 0 and \
+                timezone.now() > user.profile.key_expiry_time:
             status = "1"
             Profile.objects.get(user_id=user.profile.user_id).delete()
             User.objects.get(id=user.profile.user_id).delete()
             return render(request, 'fossee_manim/activation.html',
-                        {'status':status})
-        elif user.is_authenticated() and user.profile.is_email_verified==0:
+                          {'status': status})
+        elif user.is_authenticated() and user.profile.is_email_verified == 0:
             return render(request, 'fossee_manim/activation.html')
         elif user.is_authenticated() and user.profile.is_email_verified:
             status = "2"
             return render(request, 'fossee_manim/activation.html',
-                        {'status':status})
+                          {'status': status})
         else:
             return redirect('/register/')
 
     try:
         user = Profile.objects.get(activation_key=key)
-    except:
+    except BaseException:
         return redirect('/register/')
 
     if key == user.activation_key:
@@ -162,7 +172,7 @@ def activate_user(request, key=None):
         logout(request)
         return redirect('/logout/')
     return render(request, 'fossee_manim/activation.html',
-                {"status": status})
+                  {"status": status})
 
 
 def user_register(request):
@@ -176,9 +186,9 @@ def user_register(request):
             login(request, new_user)
             user_position = request.user.profile.position
             send_email(
-                       request, call_on='Registration',
-                       key=key
-                      )
+                request, call_on='Registration',
+                key=key
+            )
 
             return render(request, 'fossee_manim/activation.html')
         else:
@@ -195,14 +205,19 @@ def user_register(request):
         elif request.user.is_authenticated():
             return render(request, 'fossee_manim/activation.html')
         form = UserRegistrationForm()
-    return render(request, "fossee_manim/register.html", {'form': form, 'categories': categories})
+    return render(request, "fossee_manim/register.html",
+                  {'form': form, 'categories': categories})
 
 
 def explore(request, category):
-    categories = Category.objects.all() #not related to category below
-    videos = AnimationStats.objects.filter(animation__category__name= category , animation__status="released")
+    categories = Category.objects.all()  # not related to category below
+    videos = AnimationStats.objects.filter(
+        animation__category__name=category,
+        animation__status="released")
 
-    return render(request, "fossee_manim/explore.html", {"videos": videos, "categories": categories})
+    return render(request, "fossee_manim/explore.html",
+                  {"videos": videos, "categories": categories})
+
 
 @login_required
 def view_profile(request):
@@ -221,7 +236,7 @@ def view_profile(request):
             try:
                 logout(request)
                 return redirect('/login/')
-            except:
+            except BaseException:
                 return redirect('/register/')
 
 
@@ -242,7 +257,7 @@ def edit_profile(request):
         try:
             logout(request)
             return redirect('/login/')
-        except:
+        except BaseException:
             return redirect('/register/')
 
     context = {'template': template}
@@ -262,17 +277,16 @@ def edit_profile(request):
             form_data.save()
 
             return render(
-                        request, 'fossee_manim/profile_updated.html',
-                        {'categories': categories}
-                        )
+                request, 'fossee_manim/profile_updated.html',
+                {'categories': categories}
+            )
         else:
             context['form'] = form
             return render(request, 'fossee_manim/edit_profile.html', context)
     else:
         form = ProfileForm(user=user, instance=profile)
-        return render(request, 'fossee_manim/edit_profile.html', {'form': form,
-                      'categories': categories}
-                      )
+        return render(request, 'fossee_manim/edit_profile.html',
+                      {'form': form, 'categories': categories})
 
 
 @login_required
@@ -289,12 +303,12 @@ def send_proposal(request):
                 form.save()
             else:
                 return render(request, 'fossee_manim/send_proposal.html',
-                                {'form': form, 'categories': categories})
+                              {'form': form, 'categories': categories})
             return redirect('/proposal_status/')
         else:
             form = AnimationProposal()
             return render(request, 'fossee_manim/send_proposal.html',
-                      {'form': form, 'categories': categories})
+                          {'form': form, 'categories': categories})
     else:
         return redirect('/register/')
 
@@ -306,7 +320,8 @@ def proposal_status(request):
         profile = Profile.objects.get(user_id=user)
         categories = Category.objects.all()
         if profile.position == 'contributor':
-            animations = Animation.objects.filter(contributor_id=user).order_by('-created')
+            animations = Animation.objects.filter(
+                contributor_id=user).order_by('-created')
         else:
             animations = Animation.objects.order_by('-created')
             # print(animations)
@@ -315,18 +330,302 @@ def proposal_status(request):
         paginator = Paginator(list(animations), 9)
         page = request.GET.get('page')
         try:
-            anime  = paginator.page(page)
+            anime = paginator.page(page)
             print(animations.count(), anime)
         except PageNotAnInteger:
             # If page is not an integer, deliver first page.
-            anime  = paginator.page(1)
+            anime = paginator.page(1)
         except EmptyPage:
             # If page is out of range(e.g 999999), deliver last page.
-            anime  = paginator.page(paginator.num_pages)
+            anime = paginator.page(paginator.num_pages)
 
         return render(request, 'fossee_manim/proposal_status.html',
-                  {'anime': anime,
-                   'categories': categories})
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+# this method return the proposal in the status of released
+@login_required
+def sortproposal_released(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                contributor_id=user, status='released').order_by('-created')
+        else:
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                status='released').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+# this method return the proposal in the status of rejected
+@login_required
+def sortproposal_rejected(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                contributor_id=user, status='rejected').order_by('-created')
+        else:
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                status='rejected').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+# this method return the proposal in the status of changes
+@login_required
+def sortproposal_changes(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                contributor_id=user, status='changes').order_by('-created')
+        else:
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                status='changes').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+# this method return the proposal in the status of pending
+@login_required
+def sortproposal_pending(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                contributor_id=user, status='pending').order_by('-created')
+        else:
+            # filtering with the proposal status
+            animations = Animation.objects.filter(
+                status='pending').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+@login_required
+def sortproposal_released(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            animations = Animation.objects.filter(
+                contributor_id=user, status='released').order_by('-created')
+        else:
+            animations = Animation.objects.filter(
+                status='released').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+@login_required
+def sortproposal_rejected(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            animations = Animation.objects.filter(
+                contributor_id=user, status='rejected').order_by('-created')
+        else:
+            animations = Animation.objects.filter(
+                status='rejected').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+@login_required
+def sortproposal_changes(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            animations = Animation.objects.filter(
+                contributor_id=user, status='changes').order_by('-created')
+        else:
+            animations = Animation.objects.filter(
+                status='changes').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
+
+
+@login_required
+def sortproposal_pending(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        if profile.position == 'contributor':
+            animations = Animation.objects.filter(
+                contributor_id=user, status='pending').order_by('-created')
+        else:
+            animations = Animation.objects.filter(
+                status='pending').order_by('-created')
+            # print(animations)
+
+        # Show upto 9 proposals per page
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
     else:
         return redirect('/login/')
 
@@ -337,19 +636,20 @@ def edit_proposal(request, proposal_id=None):
     if is_email_checked(user) and user.is_authenticated():
         comment_form = CommentForm()
         proposal = Animation.objects.get(id=proposal_id)
-        proposal_form = AnimationProposal(instance=proposal)
+        proposal_form = AnimationProposal_edit(instance=proposal)
         upload_form = UploadAnimationForm()
         categories = Category.objects.all()
         video = AnimationStats.objects.filter(animation=proposal_id)
-        if len(video)>0:
-            msg = ('Previously a video was uploaded for '+ video[0].animation.title)
+        if len(video) > 0:
+            msg = (
+                'Previously a video was uploaded for ' +
+                video[0].animation.title)
         else:
             msg = ('No video uploaded')
         try:
-            comments = Comment.objects.filter(animation_id=proposal_id).order_by(
-                                        '-created_date'
-                                        )
-        except:
+            comments = Comment.objects.filter(
+                animation_id=proposal_id).order_by('-created_date')
+        except BaseException:
             comments = None
         if request.method == 'POST':
             text = request.POST.get('comment')
@@ -361,16 +661,16 @@ def edit_proposal(request, proposal_id=None):
                 if status1:
                     proposal.status = 'released'
                     send_email(request, call_on='released',
-                            contributor=proposal.contributor)
+                               contributor=proposal.contributor)
                 elif status3:
                     send_email(request, call_on='proposal_form',
-                     contributor=proposal.contributor)
+                               contributor=proposal.contributor)
                     return redirect('/proposal_status/')
                 else:
                     proposal.status = 'rejected'
                     makepath(proposal, reject=1)
                     send_email(request, call_on='rejected',
-                            contributor=proposal.contributor)
+                               contributor=proposal.contributor)
                 proposal.reviewer = user
                 proposal.save()
                 return redirect('/proposal_status/')
@@ -385,11 +685,12 @@ def edit_proposal(request, proposal_id=None):
                     proposal.status = 'changes'
                     proposal.save()
                     send_email(request, call_on='changes',
-                            contributor=proposal.contributor,
-                            proposal=proposal)
+                               contributor=proposal.contributor,
+                               proposal=proposal)
                 form_data.save()
                 return redirect('/edit_proposal/{}'.format(proposal_id))
-            proposal_form = AnimationProposal(request.POST, instance=proposal)
+            proposal_form = AnimationProposal_edit(
+                request.POST, instance=proposal)
             if proposal_form.is_valid():
                 p_f = proposal_form.save(commit=False)
                 p_f.contributor = user
@@ -403,25 +704,114 @@ def edit_proposal(request, proposal_id=None):
         return redirect('/register/')
 
     if comments is not None:
-            #Show upto 12 Workshops per page
-            paginator = Paginator(comments, 9)
+        # Show upto 12 Workshops per page
+        paginator = Paginator(comments, 9)
+        page = request.GET.get('page')
+        try:
+            comments = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            comments = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            comments = paginator.page(paginator.num_pages)
+    return render(request, 'fossee_manim/edit_proposal.html',
+                  {'proposal_form': proposal_form,
+                   "comments": comments,
+                   "comment_form": comment_form,
+                   "upload_form": upload_form,
+                   'video': video,
+                   'categories': categories,
+                   'msg': msg})
+
+
+# this method is used to return the details the proposal selected to delete
+@login_required
+def show_proposal_detail(request, proposal_id=None):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        try:
+            proposal = Animation.objects.get(id=proposal_id)
+            return render(request,
+                          'fossee_manim/delete_proposal.html',
+                          {'proposal': proposal})
+        except BaseException:
+            profile = Profile.objects.get(user_id=user)
+            categories = Category.objects.all()
+            if profile.position == 'contributor':
+                animations = Animation.objects.filter(
+                    contributor_id=user).order_by('-created')
+            else:
+                animations = Animation.objects.order_by('-created')
+
+            paginator = Paginator(list(animations), 9)
             page = request.GET.get('page')
             try:
-                comments = paginator.page(page)
+                anime = paginator.page(page)
+                print(animations.count(), anime)
             except PageNotAnInteger:
-            #If page is not an integer, deliver first page.
-                comments = paginator.page(1)
+                anime = paginator.page(1)
             except EmptyPage:
-                #If page is out of range(e.g 999999), deliver last page.
-                comments = paginator.page(paginator.num_pages)
-    return render(request, 'fossee_manim/edit_proposal.html',
-                      {'proposal_form': proposal_form,
-                       "comments": comments,
-                       "comment_form": comment_form,
-                        "upload_form": upload_form,
-                        'video': video,
-                        'categories': categories,
-                        'msg': msg})
+                anime = paginator.page(paginator.num_pages)
+
+            return render(request, 'fossee_manim/proposal_status.html',
+                          {'anime': anime,
+                           'categories': categories})
+    else:
+        return redirect('/register/')
+
+
+# this method is used to delete the selected proposal by the reviever
+@login_required
+def delete_proposal(request, proposal_id=None):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        try:
+            proposal = Animation.objects.get(id=proposal_id)
+            proposal.delete()
+            profile = Profile.objects.get(user_id=user)
+            categories = Category.objects.all()
+            if profile.position == 'contributor':
+                animations = Animation.objects.filter(
+                    contributor_id=user).order_by('-created')
+            else:
+                animations = Animation.objects.order_by('-created')
+            paginator = Paginator(list(animations), 9)
+            page = request.GET.get('page')
+            try:
+                anime = paginator.page(page)
+                print(animations.count(), anime)
+            except PageNotAnInteger:
+                anime = paginator.page(1)
+            except EmptyPage:
+                anime = paginator.page(paginator.num_pages)
+
+            return render(request, 'fossee_manim/proposal_status.html',
+                          {'anime': anime, 'categories': categories})
+        except BaseException:
+            profile = Profile.objects.get(user_id=user)
+            categories = Category.objects.all()
+            if profile.position == 'contributor':
+                animations = Animation.objects.filter(
+                    contributor_id=user).order_by('-created')
+            else:
+                animations = Animation.objects.order_by('-created')
+
+            paginator = Paginator(list(animations), 9)
+            page = request.GET.get('page')
+            try:
+                anime = paginator.page(page)
+                print(animations.count(), anime)
+            except PageNotAnInteger:
+                anime = paginator.page(1)
+            except EmptyPage:
+                anime = paginator.page(paginator.num_pages)
+
+            return render(request, 'fossee_manim/proposal_status.html',
+                          {'anime': anime,
+                           'categories': categories})
+    else:
+        return redirect('/login/')
 
 
 def search(request):
@@ -429,12 +819,43 @@ def search(request):
     if request.method == 'POST':
         word = request.POST.get('sbox')
         anime_list = AnimationStats.objects.filter(
-            Q(animation__title__contains=word) | Q(animation__outline__contains=word)
-            | Q(animation__category__name__contains=word) | Q(animation__subcategory__contains=word),
+            Q(
+                animation__title__contains=word) | Q(
+                animation__outline__contains=word) | Q(
+                animation__category__name__contains=word) | Q(
+                    animation__subcategory__contains=word),
             animation__status='released')
 
     return render(request, 'fossee_manim/search_results.html',
                   {'s_result': anime_list, 'categories': categories})
+
+# search results for proposal
+
+
+def search_proposal(request):
+    user = request.user
+    if is_email_checked(user) and user.is_authenticated():
+        profile = Profile.objects.get(user_id=user)
+        categories = Category.objects.all()
+        word = request.POST.get('sbox')
+        animations = Animation.objects.filter(title=word)
+        paginator = Paginator(list(animations), 9)
+        page = request.GET.get('page')
+        try:
+            anime = paginator.page(page)
+            print(animations.count(), anime)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            anime = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range(e.g 999999), deliver last page.
+            anime = paginator.page(paginator.num_pages)
+
+        return render(request, 'fossee_manim/proposal_status.html',
+                      {'anime': anime,
+                       'categories': categories})
+    else:
+        return redirect('/login/')
 
 
 @login_required
@@ -444,16 +865,16 @@ def upload_animation(request, proposal_id=None):
         if request.method == 'POST':
             proposal = Animation.objects.get(id=proposal_id)
             anim_stats = UploadAnimationForm(request.POST or None,
-                                            request.FILES or None)
+                                             request.FILES or None)
             if anim_stats.is_valid():
                 try:
                     anim = AnimationStats.objects.filter(
-                            animation=proposal)
+                        animation=proposal)
                     if anim.exists():
                         anobj = anim.first()
                         try:
                             remove(anobj.thumbnail.path)
-                        except:
+                        except BaseException:
                             pass
                         remove(anobj.video_path.path)
                         anobj.delete()
@@ -464,7 +885,7 @@ def upload_animation(request, proposal_id=None):
                             animation=proposal, video_path=request.FILES['video_path'])
                     anobj._create_thumbnail()
                     return render(request, 'fossee_manim/upload_success.html')
-                except:
+                except BaseException:
                     messages.warning(request, 'Please Upload a valid File')
                     return redirect('/edit_proposal/{}'.format(proposal_id))
 
@@ -480,15 +901,15 @@ def video(request, aid=None):
     if len(video):
         comment_form = CommentForm()
         # if views crosses limit comment the line below
-        video.update(views=F('views')+1)
-        video.update(like=F('like')+1)
+        video.update(views=F('views') + 1)
+        video.update(like=F('like') + 1)
         anim_list = AnimationStats.objects.filter(animation__status="released")
         suggestion_list = [x for x in anim_list if (
             x.animation.category == video[0].animation.category)]
         reviewer_id = video[0].animation.reviewer.id
         comment_list = Comment.objects.filter(animation=video[0].animation)
         comments = [x for x in comment_list if x.animation_status not in
-                    ('pending',  'changes')]
+                    ('pending', 'changes')]
         if request.method == 'POST':
             if is_email_checked(user):
                 comment_form = CommentForm(request.POST)
@@ -503,7 +924,7 @@ def video(request, aid=None):
     else:
         return redirect('/view_profile/')
 
-    if len(suggestion_list)>3:
+    if len(suggestion_list) > 3:
         suggestion_list = sample(suggestion_list, 3)
     else:
         suggestion_list = [x for x in anim_list if x.id != int(aid)][:3]
@@ -527,34 +948,62 @@ def search_category(request, cat=None):
 
 def guidelines(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/guidelines.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/guidelines.html',
+                  {'categories': categories})
+
 
 def about(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/about.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/about.html',
+                  {'categories': categories})
+
 
 def honorarium(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/honorarium.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/honorarium.html',
+                  {'categories': categories})
+
 
 def faqs(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/faqs.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/faqs.html',
+                  {'categories': categories})
+
 
 def outreach(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/outreach.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/outreach.html',
+                  {'categories': categories})
+
 
 def library(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/library.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/library.html',
+                  {'categories': categories})
+
 
 def libraryMath(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/libraryMath.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/libraryMath.html',
+                  {'categories': categories})
+
+
 def libraryPhys(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/libraryPhys.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/libraryPhys.html',
+                  {'categories': categories})
+
+
 def libraryCS(request):
     categories = Category.objects.all()
-    return render(request, 'fossee_manim/libraryCS.html', {'categories': categories})
+    return render(request,
+                  'fossee_manim/libraryCS.html',
+                  {'categories': categories})

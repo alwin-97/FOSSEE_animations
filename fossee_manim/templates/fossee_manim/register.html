@@ -1,39 +1,41 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		Register
-	{% endblock %}
+{% block title %}
+Register
+{% endblock %}
 
 {% block content %}
 
-	<style type="text/css">
-    	label.required::after {
-    	content: "*";
-    	color: red;
-		}
-		.errorlist {
-      color: red;
-    }
-	</style>
+<style type="text/css">
+	label.required::after {
+		content: "*";
+		color: red;
+	}
 
-	<div class="container" >
-		<br>
-		<center>
+	.errorlist {
+		color: red;
+	}
+</style>
+
+<div class="container">
+	<br>
+	<center>
 		<h1>Contributor Registration Form</h1>
 		<br>
 		<form action="" method="post">
 			{% csrf_token %}
-				<table class="table table-bordered">
-					{{ form.as_table }}
-				</table>
+			<table class="table table-bordered">
+				{{ form.as_table }}
+			</table>
 
-				<button class="btn btn-success" type="submit" style="background-color: #157b80; border-width:0px;">Register</button>
+			<button class="btn btn-success" type="submit"
+				style="background-color: #157b80; border-width:0px;">Register</button>
 		</form><br>
-		</center>
-		<!-- Activate when reviwers registeration starts -->
-		<!-- <div class="alert alert-info">
+	</center>
+	<!-- Activate when reviwers registeration starts -->
+	<!-- <div class="alert alert-info">
   			<strong>Info!</strong> reviwerss, please wait for our admin approval, if your reviwers account is not activated in 7 days, please mail us at workshops[at]fossee[dot]in
 		</div> -->
-		<br>
-	</div>
+	<br>
+</div>
 {% endblock %}

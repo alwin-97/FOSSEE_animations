@@ -1,29 +1,27 @@
-
 {% extends 'fossee_manim/base.html' %}
 
 {% block title %}
-  Upload success
+Upload success
 {% endblock %}
 
 
-  {% block extra %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="{{URL_ROOT}}/static/fossee_manim/js/bootstrap-3.3.7.min.js"></script>
-  <script type="text/javascript">
-    window.setTimeout(function()
-    {
-        location.href="{% url 'proposal_status' %}"
-    }, 9000);
+{% block extra %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="{{URL_ROOT}}/static/fossee_manim/js/bootstrap-3.3.7.min.js"></script>
+<script type="text/javascript">
+  window.setTimeout(function () {
+    location.href = "{% url 'proposal_status' %}"
+  }, 9000);
 </script>
 
-  {% endblock %}
+{% endblock %}
 {% block content %}
-  <div class="container">
-    <br><br>
-    <div class="jumbotron">
-      <h3><strong>Congratulations!</strong>Your video uploaded successfully!</h3>
-      <br>
-      <h5><strong>If you uploaded any video before this, it will be automatically overridden by this upload</h5>
-    </div>
+<div class="container">
+  <br><br>
+  <div class="jumbotron">
+    <h3><strong>Congratulations!</strong>Your video uploaded successfully!</h3>
+    <br>
+    <h5><strong>If you uploaded any video before this, it will be automatically overridden by this upload</h5>
   </div>
+</div>
 {% endblock %}

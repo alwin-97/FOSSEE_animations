@@ -1,67 +1,87 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		Honorarium
-	{% endblock %}
+{% block title %}
+Honorarium
+{% endblock %}
 
 {% block content %}
-	<script>
-		$(document).ready(function(){
-	  		$('[data-toggle="tooltip"]').tooltip();
-		});
-	</script>
-	<style>
-        span {
-            background-color: #f2e680;
-        }
-    </style>
+<script>
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+</script>
+<style>
+	span {
+		background-color: #f2e680;
+	}
+</style>
 
-	<div class="container-fluid jumbotron"  align = "justify" style="margin-top:20px; background-color: #e7edee;">
-		<h1><center>Honorarium</center></h1>
-		<div class="container" style= "font-family: 'Lato', sans-serif;">
-			<hr>
+<div class="container-fluid jumbotron" align="justify" style="margin-top:20px; background-color: #e7edee;">
+	<h1>
+		<center>Honorarium</center>
+	</h1>
+	<div class="container" style="font-family: 'Lato', sans-serif;">
+		<hr>
 
-			<h2><center>Amount</center></h2>
-			<br>
+		<h2>
+			<center>Amount</center>
+		</h2>
+		<br>
 
-			<ol>
-				<li> The honorarium amount is assigned based on:
-					<ul>
-						<li> the complexity of the topic chosen for animation, </li>
-						<li> curation of the video </li>
-						<li> the contributor’s performance, curation of the video and the final output.</li>
-					</ul>
-				</li>
-				<li> The quality of the final video you submit, the complexity of the topic chosen,
-					the correctness/succinctness of the outline and timely submission are factors that
-					determine the honorarium amount you receive. If the contributor submits the video on time
-					and with a concise outline, he/she may receive an amount of Rs 1000 - Rs 1500 per video.
-				</li>
-				<li> A quality bonus of Rs 500-1000 per video can be granted if deemed fit by the reviewer. </li>
-				<li> <strong>The final amount is up to the discretion of the moderators.</strong></li>
-			</ol>
-			<br> <br>
-			<h2><center>Procedure</center></h2>
-			<br>
-			<p> A contributor can begin with the honorarium process only after submission of the final video and its release on the website.
-            	<br>The procedure for acquiring the honorarium is as follows:
+		<ol>
+			<li> The honorarium amount is assigned based on:
+				<ul>
+					<li> the complexity of the topic chosen for animation, </li>
+					<li> curation of the video </li>
+					<li> the contributor’s performance, curation of the video and the final output.</li>
+				</ul>
+			</li>
+			<li> The quality of the final video you submit, the complexity of the topic chosen,
+				the correctness/succinctness of the outline and timely submission are factors that
+				determine the honorarium amount you receive. If the contributor submits the video on time
+				and with a concise outline, he/she may receive an amount of Rs 1000 - Rs 1500 per video.
+			</li>
+			<li> A quality bonus of Rs 500-1000 per video can be granted if deemed fit by the reviewer. </li>
+			<li> <strong>The final amount is up to the discretion of the moderators.</strong></li>
+		</ol>
+		<br> <br>
+		<h2>
+			<center>Procedure</center>
+		</h2>
+		<br>
+		<p> A contributor can begin with the honorarium process only after submission of the final video and its release
+			on the website.
+			<br>The procedure for acquiring the honorarium is as follows:
 			<ol>
 				<li>Download the forms given at the end of this page and print them out.</li>
-				<li>These forms are to be filled and sent to the address given at the bottom of this page. Please send ALL the forms in a SINGLE envelope. Forms that are not sent together are not considered under any circumstances.</li>
-				<li>After FOSSEE receives the filled-in honorarium forms, the honorarium amount is transferred to your bank account through NEFT. Fill in  Bankdetails_Form.pdf with details of the bank account to which you want the honorarium to be transferred.</li>
-				<li>We generally process your honorarium within 45 days from the day we receive your forms. However, if you do not receive your money within 45 days of acknowledgement of forms received, please feel free to contact us;  we are happy to assist you.</li>
+				<li>These forms are to be filled and sent to the address given at the bottom of this page. Please send
+					ALL the forms in a SINGLE envelope. Forms that are not sent together are not considered under any
+					circumstances.</li>
+				<li>After FOSSEE receives the filled-in honorarium forms, the honorarium amount is transferred to your
+					bank account through NEFT. Fill in Bankdetails_Form.pdf with details of the bank account to which
+					you want the honorarium to be transferred.</li>
+				<li>We generally process your honorarium within 45 days from the day we receive your forms. However, if
+					you do not receive your money within 45 days of acknowledgement of forms received, please feel free
+					to contact us; we are happy to assist you.</li>
 			</ol>
-			<p><span>Please note that the honorarium processing only starts after we receive your completed honorarium forms. Ensure that you have made a PAN card and submit the forms in time to avoid delays.</span><p>
-			<br> <br>
-			<h2><center>Forms</center></h2>
-			<br>
-			<p>Kindly print out the forms below, fill the required fields and mail them to the address:<p>
-			<ul>
-				<li> <a href = "https://static.fossee.in/animations/forms/Copyright_Transfer.pdf"> Copyright Transfer Form </a> </li>
-				<li> <a href = "https://static.fossee.in/animations/forms/Contributor_Details.pdf"> Contributor Details Form </a> </li>
-				<li> <a href = "https://static.fossee.in/animations/forms/Bank_Details.pdf"> Bank Details Form </a> </li>
-				<li> <a href = "https://static.fossee.in/animations/forms/Receipt.pdf"> Receipt </a> </li>
-			</ul>
-		</div>
+			<p><span>Please note that the honorarium processing only starts after we receive your completed honorarium
+					forms. Ensure that you have made a PAN card and submit the forms in time to avoid delays.</span>
+				<p>
+					<br> <br>
+					<h2>
+						<center>Forms</center>
+					</h2>
+					<br>
+					<p>Kindly print out the forms below, fill the required fields and mail them to the address:<p>
+							<ul>
+								<li> <a href="https://static.fossee.in/animations/forms/Copyright_Transfer.pdf">
+										Copyright Transfer Form </a> </li>
+								<li> <a href="https://static.fossee.in/animations/forms/Contributor_Details.pdf">
+										Contributor Details Form </a> </li>
+								<li> <a href="https://static.fossee.in/animations/forms/Bank_Details.pdf"> Bank Details
+										Form </a> </li>
+								<li> <a href="https://static.fossee.in/animations/forms/Receipt.pdf"> Receipt </a> </li>
+							</ul>
 	</div>
+</div>
 {% endblock %}

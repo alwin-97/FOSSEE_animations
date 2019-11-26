@@ -1,156 +1,215 @@
 {% extends 'fossee_manim/base.html' %}
 
-	{% block title %}
-		Animation Guidelines
-	{% endblock %}
+{% block title %}
+Animation Guidelines
+{% endblock %}
 
 {% block content %}
-    <style>
-        span {
-            background-color: #c2d2df;
-        }
-    </style>
-	<div class="container-fluid jumbotron" align = "justify" style="margin-top:20px; background-color: #e7edee;">
-	    <h1><center>Guidelines for Submitting Proposals</center></h1>
-		<div class="container">
-			<hr>
-			<div id="accordion">
-				<div class="card">
-					<div class="card-header" id="headingOne">
-			  		<h5 class="mb-0">
-						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				  		1. Creating an account
+<style>
+	span {
+		background-color: #c2d2df;
+	}
+</style>
+<div class="container-fluid jumbotron" align="justify" style="margin-top:20px; background-color: #e7edee;">
+	<h1>
+		<center>Guidelines for Submitting Proposals</center>
+	</h1>
+	<div class="container">
+		<hr>
+		<div id="accordion">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+						<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+							aria-expanded="true" aria-controls="collapseOne">
+							1. Creating an account
 						</button>
-			  		</h5>
-					</div>
+					</h5>
+				</div>
 
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-			  		<div class="card-body">
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="card-body">
 						<ul>
-				  		<li> Create your account on the FOSSEE Animations website.</li>
-				  		<li> Upon successful registration, an email is sent to your registered email ID. Activate your account by clicking on the activation link provided.</li>
+							<li> Create your account on the FOSSEE Animations website.</li>
+							<li> Upon successful registration, an email is sent to your registered email ID. Activate
+								your account by clicking on the activation link provided.</li>
 						</ul>
-			  		</div>
 					</div>
 				</div>
-				<div class="card">
-					<div class="card-header" id="headingTwo">
-			  		<h5 class="mb-0">
-						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+							aria-expanded="false" aria-controls="collapseTwo">
 							2. Submitting a proposal
 						</button>
-			  		</h5>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-			  		<div class="card-body">
-						Before you start creating the animation videos, you need to send a proposal. The proposal submission is divided into two stages, Stage 1 and Stage 2. The details for both the stages are given below.
+					</h5>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+					<div class="card-body">
+						Before you start creating the animation videos, you need to send a proposal. The proposal
+						submission is divided into two stages, Stage 1 and Stage 2. The details for both the stages are
+						given below.
 						<ul class="list-group">
-				  		<li class="list-group-item">  <b class="text-center">Stage 1</b><hr/>
-						<ol>
-						<li>Once the account is activated and you are logged in, proposals for video ideas can be submitted. Click on “Send Proposal” in the drop-down list next to your username (in the top-right corner).
-						</li>
-						<li>Enter your <b>Category and Subcategory</b>. The Subcategory field refers to the specific subdomain in which the topic to be animated lies. </br>
-						For example, if any topic related to Newtonian motion is to be animated, the Category would be Physics and the Subcategory would be Classical Mechanics.<br>
-						<b>Note: </b>If there is any ambiguity regarding the Subcategory (or sub-categories) that the chosen topic comes under, enter your best guess after performing a Google Search.
-						</li>
-						<li>The Title field refers to the specific topic that you have chosen to animate.
-							Concerning the the previous example, your title would be something like “Angular Momentum” or “Newton’s Laws of Motion”.</li>
-						<li>The Outline field should ideally include:
-							<ul><li>a general description of the chosen topic,</li>
-							<li>the key points you intend to cover in your animation/ video,</li>
-							<li>the tools you might use</li></ul>
-							<b>Note: </b> If you haven’t zeroed-down on all the above specifics, try to mention a fair estimate. 150-300 words would be sufficient.
-						</li>
-						<li>The Tags field should be filled with keywords relating to your topic of animation (i.e., your Title).
-							Some of the possible tags for “Angular Momentum” are “Newtonian Physics”, “Classical Mechanics” and “Rotational Motion”.</li>
-						<li>Click on Save to Submit your proposal. You will now be able to view and edit your proposals on the proposals page. You can access this page by selecting “View Proposals” in the drop-down list next to your username in the top-right corner of the website.</li>
-						</ol>
-						</li>
-					  	<li class="list-group-item"> <b class="text-center">Stage 2</b><hr/>
-						<ol>
-						<li>Once you have submitted Stage 1 of the proposal, you will receive an email on your registered email within 3 working days. It will contain an attached Writer document (.odt), where specific details of the animation(s) proposed have to be filled in. </li>
-						<li>Further correspondence between the contributor and the moderator usually happens in the same email thread.</li>
-						<li>After the document has been submitted and has passed the moderator’s review, the proposal is cleared for submission on the FOSSEE Animations website. The contributor is notified of the same via email.</li>
-						</ol>
-						<hr>
-						Please note that the second form is completed and sent after the contributor has worked out the more precise details of their proposed animation. The moderators should get a fair idea of what the video you animate will consist of such as the approach to visualising a concept, the tools used and the books used for reference, among other things.
-					  	</li>
+							<li class="list-group-item"> <b class="text-center">Stage 1</b>
+								<hr />
+								<ol>
+									<li>Once the account is activated and you are logged in, proposals for video ideas
+										can be submitted. Click on “Send Proposal” in the drop-down list next to your
+										username (in the top-right corner).
+									</li>
+									<li>Enter your <b>Category and Subcategory</b>. The Subcategory field refers to the
+										specific subdomain in which the topic to be animated lies. </br>
+										For example, if any topic related to Newtonian motion is to be animated, the
+										Category would be Physics and the Subcategory would be Classical Mechanics.<br>
+										<b>Note: </b>If there is any ambiguity regarding the Subcategory (or
+										sub-categories) that the chosen topic comes under, enter your best guess after
+										performing a Google Search.
+									</li>
+									<li>The Title field refers to the specific topic that you have chosen to animate.
+										Concerning the the previous example, your title would be something like “Angular
+										Momentum” or “Newton’s Laws of Motion”.</li>
+									<li>The Outline field should ideally include:
+										<ul>
+											<li>a general description of the chosen topic,</li>
+											<li>the key points you intend to cover in your animation/ video,</li>
+											<li>the tools you might use</li>
+										</ul>
+										<b>Note: </b> If you haven’t zeroed-down on all the above specifics, try to
+										mention a fair estimate. 150-300 words would be sufficient.
+									</li>
+									<li>The Tags field should be filled with keywords relating to your topic of
+										animation (i.e., your Title).
+										Some of the possible tags for “Angular Momentum” are “Newtonian Physics”,
+										“Classical Mechanics” and “Rotational Motion”.</li>
+									<li>Click on Save to Submit your proposal. You will now be able to view and edit
+										your proposals on the proposals page. You can access this page by selecting
+										“View Proposals” in the drop-down list next to your username in the top-right
+										corner of the website.</li>
+								</ol>
+							</li>
+							<li class="list-group-item"> <b class="text-center">Stage 2</b>
+								<hr />
+								<ol>
+									<li>Once you have submitted Stage 1 of the proposal, you will receive an email on
+										your registered email within 3 working days. It will contain an attached Writer
+										document (.odt), where specific details of the animation(s) proposed have to be
+										filled in. </li>
+									<li>Further correspondence between the contributor and the moderator usually happens
+										in the same email thread.</li>
+									<li>After the document has been submitted and has passed the moderator’s review, the
+										proposal is cleared for submission on the FOSSEE Animations website. The
+										contributor is notified of the same via email.</li>
+								</ol>
+								<hr>
+								Please note that the second form is completed and sent after the contributor has worked
+								out the more precise details of their proposed animation. The moderators should get a
+								fair idea of what the video you animate will consist of such as the approach to
+								visualising a concept, the tools used and the books used for reference, among other
+								things.
+							</li>
 						</ul>
-			  		</div>
 					</div>
 				</div>
-
-
-			<div class="card">
-			<div class="card-header" id="headingThree">
-			  <h5 class="mb-0">
-				<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">3.
-			Creating your animation / visualisation: </button>
-			  </h5>
-			</div>
-			<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-			  <div class="card-body">
-				<ul>
-					<li>You may use any tool for creating your animation. More than one tool may also be used, as per the discretion of the contributor. However, you are expected to use only open source tools such as manim, mayavi and blender. You may also use an open-source game engine. For more details contact: <a href="mailto:animations@fossee.in">animations@fossee.in</a></li>
-			<li>Submit the final video in a .mp4 format.</li>
-			<li>Any queries can be clarified by email or through the comments on the proposal submission page.</li>
-			<li>In case you feel that the animation video requires narration, you may provide a complementary script in a .txt file over email. A voiceover would be provided for the animations from FOSSEE. You may refer to the videos already published on the website for instances of animations with and without an additional script. Email <a href="mailto:animations@fossee.in">animations@fossee.in</a> if you want to add a script. </li>
-			<hr/>
-			<b>References for animations</b>
-			<li>You may refer to <a href="https://purusharthsaxena.wordpress.com/">this blog</a> and <a href="https://talkingphysics.wordpress.com/2019/01/08/getting-started-animating-with-manim-and-python-3-7/">this blog</a> for getting started with <b>manim</b>. <a href="https://www.youtube.com/watch?v=r6OD07Qq2mw">Here's the link</a> for getting started with mayavi.</li>
-				</ul>
-			  </div>
-			</div>
-			</div>
-
-			<div class="card">
-			<div class="card-header" id="headingFour">
-			  <h5 class="mb-0">
-				<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-				  4. Uploading the final video
-				</button>
-			  </h5>
-			</div>
-			<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-			  <div class="card-body">
-				After submitting the Proposal - Form 2, and after the moderator has approved, you will receive a link on your proposals page for uploading the required video. FOSSEE notifies you of the same via email.
-			  </div>
-			</div>
 			</div>
 
 
 			<div class="card">
-			<div class="card-header" id="headingFive">
-			  <h5 class="mb-0">
-				<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-				  5. Obtaining certificates
-				</button>
-			  </h5>
+				<div class="card-header" id="headingThree">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+							aria-expanded="false" aria-controls="collapseThree">3.
+							Creating your animation / visualisation: </button>
+					</h5>
+				</div>
+				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+					<div class="card-body">
+						<ul>
+							<li>You may use any tool for creating your animation. More than one tool may also be used,
+								as per the discretion of the contributor. However, you are expected to use only open
+								source tools such as manim, mayavi and blender. You may also use an open-source game
+								engine. For more details contact: <a
+									href="mailto:animations@fossee.in">animations@fossee.in</a></li>
+							<li>Submit the final video in a .mp4 format.</li>
+							<li>Any queries can be clarified by email or through the comments on the proposal submission
+								page.</li>
+							<li>In case you feel that the animation video requires narration, you may provide a
+								complementary script in a .txt file over email. A voiceover would be provided for the
+								animations from FOSSEE. You may refer to the videos already published on the website for
+								instances of animations with and without an additional script. Email <a
+									href="mailto:animations@fossee.in">animations@fossee.in</a> if you want to add a
+								script. </li>
+							<hr />
+							<b>References for animations</b>
+							<li>You may refer to <a href="https://purusharthsaxena.wordpress.com/">this blog</a> and <a
+									href="https://talkingphysics.wordpress.com/2019/01/08/getting-started-animating-with-manim-and-python-3-7/">this
+									blog</a> for getting started with <b>manim</b>. <a
+									href="https://www.youtube.com/watch?v=r6OD07Qq2mw">Here's the link</a> for getting
+								started with mayavi.</li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-			  <div class="card-body">
-				The criterion for obtaining a certificate from FOSSEE, IITB is that you should have successfully submitted and uploaded your animation on the FOSSEE animations website.
-			FOSSEE sends the certificate to your registered email within 15 working days. If you submit a bunch of closely related videos in a series, you receive a certificate for that set. Otherwise, for every standalone contribution, you receive a certificate. The certificate is issued by FOSSEE, IIT Bombay.
-			  </div>
-			</div>
+
+			<div class="card">
+				<div class="card-header" id="headingFour">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+							aria-expanded="false" aria-controls="collapseFour">
+							4. Uploading the final video
+						</button>
+					</h5>
+				</div>
+				<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+					<div class="card-body">
+						After submitting the Proposal - Form 2, and after the moderator has approved, you will receive a
+						link on your proposals page for uploading the required video. FOSSEE notifies you of the same
+						via email.
+					</div>
+				</div>
 			</div>
 
 
 			<div class="card">
-			<div class="card-header" id="headingSix">
-			  <h5 class="mb-0">
-				<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-				  6. Acquiring the honorarium
-				</button>
-			  </h5>
+				<div class="card-header" id="headingFive">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
+							aria-expanded="false" aria-controls="collapseFive">
+							5. Obtaining certificates
+						</button>
+					</h5>
+				</div>
+				<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+					<div class="card-body">
+						The criterion for obtaining a certificate from FOSSEE, IITB is that you should have successfully
+						submitted and uploaded your animation on the FOSSEE animations website.
+						FOSSEE sends the certificate to your registered email within 15 working days. If you submit a
+						bunch of closely related videos in a series, you receive a certificate for that set. Otherwise,
+						for every standalone contribution, you receive a certificate. The certificate is issued by
+						FOSSEE, IIT Bombay.
+					</div>
+				</div>
 			</div>
-			<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-			  <div class="card-body">
-				<a href="https://animations.fossee.in/honorarium/">Click here</a> to learn about the procedure for receiving the honorarium.
-			  </div>
-			</div>
+
+
+			<div class="card">
+				<div class="card-header" id="headingSix">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix"
+							aria-expanded="false" aria-controls="collapseSix">
+							6. Acquiring the honorarium
+						</button>
+					</h5>
+				</div>
+				<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+					<div class="card-body">
+						<a href="https://animations.fossee.in/honorarium/">Click here</a> to learn about the procedure
+						for receiving the honorarium.
+					</div>
+				</div>
 			</div>
 		</div>
-		</div>
-    </div>
+	</div>
+</div>
 {% endblock %}

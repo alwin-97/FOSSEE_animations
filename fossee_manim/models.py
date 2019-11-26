@@ -13,7 +13,7 @@ import subprocess
 position_choices = (
     ("contributor", "Contributor"),
     ("reviewer", "Reviewer")
-    )
+)
 
 department_choices = (
     ("computer", "Computers"),
@@ -29,7 +29,7 @@ department_choices = (
     ("electronics", "Electronics"),
     ("energy science and engineering", "Energy Science and Engineering"),
     ("others", "Others")
-    )
+)
 
 title = (
     ("Professor", "Prof."),
@@ -40,7 +40,7 @@ title = (
     ("Mr", "Mr."),
     ("Mrs", "Mrs."),
     ("Miss", "Ms."),
-    )
+)
 
 source = (
     ("FOSSEE website", "FOSSEE website"),
@@ -48,46 +48,46 @@ source = (
     ("Social Media", "Social Media"),
     ("From other College", "From other College"),
     ("others", "Others")
-    )
+)
 
 states = (
-    ("IN-AP",	"Andhra Pradesh"),
-    ("IN-AR",	"Arunachal Pradesh"),
-    ("IN-AS",	"Assam"),
-    ("IN-BR",	"Bihar"),
-    ("IN-CT",	"Chhattisgarh"),
-    ("IN-GA",	"Goa"),
-    ("IN-GJ",	"Gujarat"),
-    ("IN-HR",	"Haryana"),
-    ("IN-HP",	"Himachal Pradesh"),
-    ("IN-JK",	"Jammu and Kashmir"),
-    ("IN-JH",	"Jharkhand"),
-    ("IN-KA",	"Karnataka"),
-    ("IN-KL",	"Kerala"),
-    ("IN-MP",	"Madhya Pradesh"),
-    ("IN-MH",	"Maharashtra"),
-    ("IN-MN",	"Manipur"),
-    ("IN-ML",	"Meghalaya"),
-    ("IN-MZ",	"Mizoram"),
-    ("IN-NL",	"Nagaland"),
-    ("IN-OR",	"Odisha"),
-    ("IN-PB",	"Punjab"),
-    ("IN-RJ",	"Rajasthan"),
-    ("IN-SK",	"Sikkim"),
-    ("IN-TN",	"Tamil Nadu"),
-    ("IN-TG",	"Telangana"),
-    ("IN-TR",	"Tripura"),
-    ("IN-UT",	"Uttarakhand"),
-    ("IN-UP",	"Uttar Pradesh"),
-    ("IN-WB",	"West Bengal"),
-    ("IN-AN",	"Andaman and Nicobar Islands"),
-    ("IN-CH",	"Chandigarh"),
-    ("IN-DN",	"Dadra and Nagar Haveli"),
-    ("IN-DD",	"Daman and Diu"),
-    ("IN-DL",	"Delhi"),
-    ("IN-LD",	"Lakshadweep"),
-    ("IN-PY",	"Puducherry")
-    )
+    ("IN-AP", "Andhra Pradesh"),
+    ("IN-AR", "Arunachal Pradesh"),
+    ("IN-AS", "Assam"),
+    ("IN-BR", "Bihar"),
+    ("IN-CT", "Chhattisgarh"),
+    ("IN-GA", "Goa"),
+    ("IN-GJ", "Gujarat"),
+    ("IN-HR", "Haryana"),
+    ("IN-HP", "Himachal Pradesh"),
+    ("IN-JK", "Jammu and Kashmir"),
+    ("IN-JH", "Jharkhand"),
+    ("IN-KA", "Karnataka"),
+    ("IN-KL", "Kerala"),
+    ("IN-MP", "Madhya Pradesh"),
+    ("IN-MH", "Maharashtra"),
+    ("IN-MN", "Manipur"),
+    ("IN-ML", "Meghalaya"),
+    ("IN-MZ", "Mizoram"),
+    ("IN-NL", "Nagaland"),
+    ("IN-OR", "Odisha"),
+    ("IN-PB", "Punjab"),
+    ("IN-RJ", "Rajasthan"),
+    ("IN-SK", "Sikkim"),
+    ("IN-TN", "Tamil Nadu"),
+    ("IN-TG", "Telangana"),
+    ("IN-TR", "Tripura"),
+    ("IN-UT", "Uttarakhand"),
+    ("IN-UP", "Uttar Pradesh"),
+    ("IN-WB", "West Bengal"),
+    ("IN-AN", "Andaman and Nicobar Islands"),
+    ("IN-CH", "Chandigarh"),
+    ("IN-DN", "Dadra and Nagar Haveli"),
+    ("IN-DD", "Daman and Diu"),
+    ("IN-DL", "Delhi"),
+    ("IN-LD", "Lakshadweep"),
+    ("IN-PY", "Puducherry")
+)
 
 status = (
     ("pending", "Pending Acceptance"),
@@ -107,6 +107,7 @@ def attachments(instance, filename):
                      instance.animation.title,
                      str(instance.animation.id), filename)
 
+
 def validate_file_extension(value):
     import os
     from django.core.exceptions import ValidationError
@@ -115,6 +116,13 @@ def validate_file_extension(value):
     if not ext.lower() in valid_extensions:
         raise ValidationError(u'Unsupported file extension.')
 
+def validate_img_extension(value):
+    import os
+    from django.core.exceptions import ValidationError
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.jpg','.jpeg','.png']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError(u'Unsupported file extension.')
 
 class Profile(models.Model):
     """Profile for users(instructors and coordinators)"""
@@ -124,13 +132,13 @@ class Profile(models.Model):
     institute = models.CharField(max_length=150, blank=True)
     department = models.CharField(max_length=150, choices=department_choices)
     phone_number = models.CharField(
-                max_length=10,
-                validators=[RegexValidator(
-                                regex=r'^.{10}$', message=(
-                                    "Phone number must be entered \
+        max_length=10,
+        validators=[RegexValidator(
+                    regex=r'^.{10}$', message=(
+                        "Phone number must be entered \
                                 in the format: '9999999999'.\
                                 Up to 10 digits allowed.")
-                            )], null=False)
+                    )], null=False)
     position = models.CharField(max_length=32, choices=position_choices,
                                 default='contributor')
     how_did_you_hear_about_us = models.CharField(max_length=255, blank=True,
@@ -140,21 +148,21 @@ class Profile(models.Model):
     state = models.CharField(max_length=255, choices=states, default="IN-MH")
     pincode = models.CharField(max_length=6, blank=True,
                                validators=[RegexValidator(
-                                 regex=r'^.{6}$', message=(
-                                    "Please enter valid PINCODE"
-                                 )
-                                )])
+                                   regex=r'^.{6}$', message=(
+                                       "Please enter valid PINCODE"
+                                   )
+                               )])
     is_email_verified = models.BooleanField(default=False)
     activation_key = models.CharField(max_length=255, blank=True, null=True)
     key_expiry_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return u"id: {0}| {1} {2} | {3} ".format(
-                                            self.user.id,
-                                            self.user.first_name,
-                                            self.user.last_name,
-                                            self.user.email
-                                            )
+            self.user.id,
+            self.user.first_name,
+            self.user.last_name,
+            self.user.email
+        )
 
 
 class Category(models.Model):
@@ -166,11 +174,20 @@ class Category(models.Model):
         return u"{0}".format(self.name)
 
 
+# test
+class Example(models.Model):
+    name = models.CharField(max_length=20)
+    tags = TaggableManager()
+
+
 class Animation(models.Model):
     title = models.CharField(max_length=255)
     contributor = models.ForeignKey(User, on_delete=models.CASCADE)
-    reviewer = models.ForeignKey(User, null=True, on_delete=models.CASCADE,
-                                 related_name="%(app_label)s_%(class)s_related")
+    reviewer = models.ForeignKey(
+        User,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="%(app_label)s_%(class)s_related")
     outline = models.TextField()
     status = models.CharField(max_length=255, choices=status)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -178,9 +195,19 @@ class Animation(models.Model):
     created = models.DateTimeField(default=timezone.now)
     tags = TaggableManager()
     history = HistoricalRecords()
+    # modifications
+    concepts=models.TextField(null=True,blank=True)
+    audience=models.TextField(null=True,blank=True)
+    reference=models.TextField(null=True,blank=True)
+    tools=models.TextField(null=True,blank=True)
+    detaled_description=models.TextField(null=True,blank=True)
+    link=models.CharField(max_length=255, blank=True)
+    sketch=models.ImageField(null=True, blank=True, upload_to=attachments, validators=[validate_img_extension])
 
     def __str__(self):
         return u"{0} | {1}".format(self.title, self.status)
+
+
 
 
 class Comment(models.Model):
@@ -203,16 +230,20 @@ class AnimationStats(models.Model):
     like = models.PositiveIntegerField(default=0)
     dislike = models.PositiveIntegerField(default=0)
     thumbnail = models.ImageField(null=True, blank=True, upload_to=attachments)
-    video_path = models.FileField(null=True, blank=True, upload_to=attachments, validators=[validate_file_extension])
+    video_path = models.FileField(
+        null=True,
+        blank=True,
+        upload_to=attachments,
+        validators=[validate_file_extension])
 
     def _create_thumbnail(self):
         video_path = self.video_path.path
         img_output = path.join(
-            tempfile.mkdtemp(),  "{0}.jpg".format(self.animation.title)
-            )
+            tempfile.mkdtemp(), "{0}.jpg".format(self.animation.title)
+        )
         file_name = "{0}.jpg".format(self.animation.title)
         subprocess.call(['ffmpeg', '-i', video_path, '-ss', '00:00:02.000',
-                        '-vframes', '1', img_output])
+                         '-vframes', '1', img_output])
         if path.exists(img_output):
             que_file = open(img_output, 'rb')
             # Converting to Python file object with
@@ -223,8 +254,8 @@ class AnimationStats(models.Model):
     def _create_ogv(self):
         video_input = self.video_path.path
         vid_output = path.join(
-            tempfile.mkdtemp(),  "{0}.ogv".format(self.animation.title)
-            )
+            tempfile.mkdtemp(), "{0}.ogv".format(self.animation.title)
+        )
         file_name = "{0}.ogv".format(self.animation.title)
         subprocess.call(['ffmpeg', '-i', video_input, '-r', '24', vid_output])
         if path.exists(vid_output):
