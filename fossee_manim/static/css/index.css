@@ -62,7 +62,7 @@ form.example::after {
 }
 
 #btns {
-    padding:25 25 25 25;
+    padding: 25 25 25 25;
     font-size: 155%;
     font-family: 'Lato', sans-serif;
 }
@@ -124,38 +124,3 @@ hr {
     background-color: #ffe0b2;
     border-radius: 50%;
   }
-
-.footer{
-    right: 0;
-    left: 0;
-<<<<<<< HEAD
-    bottom: 0;
-    padding: 1rem;
-=======
-    position: relative;
-    bottom: 0;
-
-    owerflow: hidden;
-    padding: 95px;
->>>>>>> cfdc41deed280bddbcc6c3cf45e30f33ea139e88
-    text-align: center;
-}
-a{
-    color:white;
-}
-
-a:hover{
-    color:white;
-    background-color: gray;
-}
-
-.navbar-toggler-icon {
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em;
-    vertical-align: middle;
-    content: "";
-    background: no-repeat center center;
-    background-size: 100% 100%;
-    background-color: white;
-}

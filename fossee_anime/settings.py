@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'taggit',
-    'simple_history',
+    'simple_history'
 ]
 
 MIDDLEWARE_CLASSES = [

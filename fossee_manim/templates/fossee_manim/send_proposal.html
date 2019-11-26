@@ -1,49 +1,47 @@
 {% extends 'fossee_manim/base.html' %}
 
-{% block title %}
-Send Proposals
-{% endblock %}
+	{% block title %}
+		Send Proposals
+	{% endblock %}
 
-{% block content %}
-{% if messages %}
-<ul class="messages">
-	{% for message in messages %}
-	<div class="alert alert-{{ message.tags }}">
-		<li {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}
-		</li>
+	{% block content %}
+			{% if messages %}
+			<ul class="messages">
+					{% for message in messages %}
+						<div class="alert alert-{{ message.tags }}">
+							<li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }}
+							</li>
+						</div>
+					{% endfor %}
+			</ul>
+			{% endif %}
+
+	<div class="container-fluid jumbotron" align="center" style="background-color: white;">
+		<h1><center>Proposal - Stage 1</center></h1>
+		<hr>
+			<div class="alert alert-info" style= "background-color: #c2eff4; color: #157b80;">
+					Please Note: If you're not serious about creating animations, do not send us a proposal.
+					Fake submissions can result in permanent ban.
+			  </div>
+			 
+
+		<form method="post">
+			{% csrf_token %}
+			<br/>
+			<table>
+				{{ form.as_table }}
+			</table>
+			<br>
+			<br>
+			<button class="btn btn-success" id = "btnblue" type="submit">Save</button>
+		</form>
+
+		<!-- Initialize Quill editor -->
+		<script>
+		  var quill = new Quill('#custom_editor', {
+		    theme: 'snow'
+		  });
+		</script>
+
 	</div>
-	{% endfor %}
-</ul>
-{% endif %}
-
-<div class="container-fluid jumbotron" align="center" style="background-color: white;">
-	<h1>
-		<center>Project Proposal</center>
-	</h1>
-	<hr>
-	<div class="alert alert-info" style="background-color: #c2eff4; color: #157b80;">
-		Please Note: If you're not serious about creating animations, do not send us a proposal.
-		Fake submissions can result in permanent ban.
-	</div>
-
-
-	<form method="post">
-		{% csrf_token %}
-		<br />
-		<table>
-			{{ form.as_table }}
-		</table>
-		<br>
-		<br>
-		<button class="btn btn-success" id="btnblue" type="submit">Save</button>
-	</form>
-
-	<!-- Initialize Quill editor -->
-	<script>
-		var quill = new Quill('#custom_editor', {
-			theme: 'snow'
-		});
-	</script>
-
-</div>
-{% endblock %}
+	{% endblock %}

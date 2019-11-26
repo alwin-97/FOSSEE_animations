@@ -1,134 +1,75 @@
 {% extends 'fossee_manim/base.html' %}
 
-{% block title %}
-    Proposal Status
-{% endblock %}
+	{% block title %}
+		Proposal Status
+	{% endblock %}
 {% block content %}
 
-    <div class="jumbotron" style="background-color: white; margin-top: 0px;">
-        <div class="container" align="center">
+<div class = "jumbotron" style = "background-color: white; margin-top: 0px;">
+	<div class="container" align="center">
 
-            <h2> Proposal Status </h2>
-            <hr>
-            <div class="row">
-                <!-- 
-                    This filtering section contains
-                    1. Search option for the submitted proposal
-                    2. Select the proposals who ahve the status Rejected
-                    3. Select the proposals who ahve the status Released
-                    4. Select the proposals who ahve the status Changes
-                    5. Select the proposals who ahve the status Pending
-                 -->
-                <div class="col-md-4">
-                    <form class="form-inline" method="POST" action="/search_proposal/">
-                        {% csrf_token %}
-                        <input class="form-control mr-sm-2" type="search" id="sbox" name="sbox"
-                               placeholder="Search for proposals">
-                        <button class="btn btn-primary my-2 my-sm-0" id="btnblue" type="submit">
-                            Search
-                        </button>
-                    </form>
-                </div>
-
-                <div class="col-md-2">
-                    <a href="{% url 'sortproposal_rejected' %}">
-                        <button type="button" class="btn btn-info" id="btnred">Rejected</button>
-                    </a>
-                </div>
-
-                <div class="col-md-2">
-                    <a href="{% url 'sortproposal_released' %}">
-                        <button type="button" class="btn btn-info" id="btnred">Released</button>
-                    </a>
-                </div>
-
-                <div class="col-md-2">
-                    <a href="{% url 'sortproposal_changes' %}">
-                        <button type="button" class="btn btn-info" id="btnred">Changes</button>
-                    </a>
-                </div>
-
-                <div class="col-md-2">
-                    <a href="{% url 'sortproposal_pending' %}">
-                        <button type="button" class="btn btn-info" id="btnred">Pending</button>
-                    </a>
-                </div>
-                <!-- end of filtering section -->
-            </div>
-            <hr>
-            <table class="table table-hover" style="font-family: 'Lato', sans-serif;">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Created Date</th>
-                    {% if request.user.profile.position == 'reviewer' %}
-                        <th>Contributor Name</th>
-                    {% endif %}
-                </tr>
-                </thead>
-                {% for an in anime %}
-                    <tbody>
-                    <tr>
-                        <td>{{ an.title }}</td>
-                        {% if an.status == 'rejected' %}
-                            <td><span class="text-danger">{{ an.status }}</span></td>
-                        {% elif an.status == 'released' %}
-                            <td><span class="text-success">{{ an.status }}</span></td>
-                        {% else %}
-                            <td><span class="text-info">{{ an.status }}</span></td>
-                        {% endif %}
-                        <td><span class="badge">{{ an.created }}</span></td>
-                        <td>
-                            {% if request.user.profile.position == 'reviewer' %}
-                                {{ an.contributor.get_full_name }}
-                            {% endif %}
-                        </td>
-                        <td>
-                                <a href="{% url 'edit_proposal' an.id %}">
-                                    <button type="button" class="btn btn-info"
-                                            id="btnblue">Edit
-                                    </button>
-                                </a>
-                        </td>
-                        {% if request.user.profile.position == 'reviewer' %}
-                            <td><a href="{% url 'show_proposal_detail' an.id %}">
-                                <button type="button" class="btn btn-info" id="btnred">Delete</button>
-                            </a></td>
-                        {% endif %}
-                    </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        </div>
+	<h2> Proposal Status </h2>
+	<hr>
+	<table class="table table-hover" style= "font-family: 'Lato', sans-serif;">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Status</th>
+				<th>Created Date</th>
+				{% if request.user.profile.position == 'reviewer' %}
+				  <th>Contributor Name</th>
+				{% endif %}
+			</tr>
+		</thead>
+		{% for an in anime %}
+			<tbody>
+				<tr>
+					<td>{{ an.title }}</td>
+					{% if an.status == 'rejected' %}
+						<td><span class="text-danger">{{ an.status }}</span></td>
+					{% elif an.status == 'released' %}
+					<td><span class="text-success">{{ an.status }}</span></td>
+					{% else %}
+					<td><span class="text-info">{{ an.status }}</span></td>
+					{% endif %}
+					<td><span class="badge">{{ an.created }}</span></td>
+					{% if request.user.profile.position == 'reviewer' %}
+						<td>{{ an.contributor.get_full_name }}</td>
+					{% endif %}
+					<td><a href="{% url 'edit_proposal' an.id %}"><button type="button" class="btn btn-info" id= "btnblue">Edit</button></a></td>
+				</tr>
+			</tbody>
+		{% endfor %}
+	</table>
+	</div>
 
 
-        <!-- Page Navigation -->
-        <div class="container">
-            <div class="Page-Nav" align="center">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination pagination-sm">
-                        <li class="page-item">
-                            {% if anime.has_previous %}
-                                <a class="page-link" tabindex="-1"
-                                   href="?page={{ anime.previous_page_number }}">Prev</a>
-                            {% endif %}
-                        </li>
-                        <li class="page-item">
-						<span class="current">
-							Page {{ anime.number }} of {{ anime.paginator.num_pages }}
-						</span>
-                        </li>
-                        <li class="page-item">
-                            {% if anime.has_next %}
-                                <a class="page-link" href="?page={{ anime.next_page_number }}"> Next
-                                </a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
+	<!-- Page Navigation -->
+	<div class="container">
+		<div class="Page-Nav" align="center">
+		<nav aria-label="Page navigation">
+		 	<ul class="pagination pagination-sm">
+			  	<li class="page-item">
+								    {% if anime.has_previous %}
+														<a class="page-link" tabindex="-1"
+																href="?page={{ anime.previous_page_number }}">Prev</a>
+									  {% endif %}
+								    </li>
+								    <li class="page-item">
+								    <span class="current" >
+									 Page {{ anime.number }} of {{ anime.paginator.num_pages }}
+										</span>
+									  </li>
+								    <li class="page-item">
+								    {% if anime.has_next %}
+														 <a class="page-link" href="?page={{ anime.next_page_number }}"> Next
+														</a>
+									  {% endif %}
+			    </li>
+		  	</ul>
+		</nav>
+		</div>
+	</div>
+</div>
 
-{% endblock %}
+	{% endblock %}
