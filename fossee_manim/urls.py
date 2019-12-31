@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^search_category/(?P<cat>.+)$', views.search_category,
         name='search_category'),
     url(r'^about/$', views.about, name='about'),
-    url(r'^outreach/$', views.outreach, name='outreach'),
+    url(r'^fellowship/$', views.fellowship, name='fellowship'),
     url(r'^library/$', views.library, name='library'),
     url(r'^libraryMath/$', views.libraryMath, name='libraryMath'),
     url(r'^libraryPhys/$', views.libraryPhys, name='libraryPhys'),

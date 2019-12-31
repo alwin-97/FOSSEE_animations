@@ -1,0 +1,111 @@
+{% extends 'fossee_manim/base.html' %}
+
+{% block title %}
+FOSSEE Animations | Fellowship
+{% endblock %}
+{% block content %}
+<style>
+	table, th, td {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+</style>
+<div class="container-fluid jumbotron" align="justify" style="margin-top:20px; background-color: transparent">
+	<h1>
+		<center>FOSSEE Summer Fellowship 2020</center>
+	</h1>
+	<div class="container" style="font-family: 'Lato', sans-serif;">
+		<hr>
+		<h4>Registration</h4>
+		<ul>
+			<li>The registration for FOSSEE Summer Fellowship 2019 starts on 1 January 2020.</li>
+			<li>For registration, click <a href="https://courses.fossee.in">here</a>.</li>
+			<li>To view the complete list of projects, click <a href="https://fossee.in/fellowship/2019">here</a>.</li>
+			<li>You can view the reports of students participated in FOSSEE Summer Fellowship 2018 by clicking here.</li>
+		</ul>
+
+		<h4>Important Dates</h4>
+		Click <a href="https://fossee.in/fellowship/2020#dates">here</a> to know the important dates.<br><br>
+		<h4>Screening Task</h4>
+		Creation of lecture notes for a mathematics topic and numerical computation
+		<br><br>
+		<h4>Description of the Screening Task</h4>
+		During the course of this internship you will be creating lecture notes along with their corresponding animations. This task has been divided in two parts. It is mandatory to complete both the parts as described below for this screening task to be considered as completed.
+		<br>
+		<b>Please choose either Complex Analysis OR Group Theory OR Linear Algebra for this task.</b>
+		<ul>
+			<li>
+				<b>Part 1 (Writing Style/Efficiency):</b>
+				<ol>
+					<li>Choose an Introductory topic in either one of the following: <i>Complex Analysis / Group Theory / Linear Algebra</i></li>
+					<li>Make lecture notes in order to explain the topic. You may take inspiration from <a href="https://math.animations.fossee.in/realanalysis">https://math.animations.fossee.in/realanalysis</a>.</i></li>
+					<li>Include at-least 4-5 diagrams in your submission. Try to make diagrams as straightforward as possible.</li>
+					<li>Please ensure that you are writing in eloquent and explains the topic thoroughly.</li>
+				</ol>
+				Note: Plagiarism will not be entertained and will result in immediate rejection.
+			</li>
+			<li><b>Part 2 (Numerical computation):</b><br>
+				 	This task will test the numerical computation ability using numpy (and Python). Based on what topic you selected, please choose the relevant task below:
+					<table style="width:100%">
+				  <tr>
+				    <th>Complex Analysis</th>
+				    <th>Linear Algebra</th>
+				    <th>Group Theory</th>
+				  </tr>
+				  <tr>
+				    <td>1. Plot the Argand Plane with matplotlib and<br>
+								illustrate the multiplication of two complex<br>
+								numbers<br>
+								2. Plot a parametric surface in matplotlib</td>
+				    <td>1. Perform at least 5 advanced linear algebra opera-<br>
+							   tions using Numpy and plot them using Matplotlib.<br>
+							   Provide sufficient explanation with comments<br>
+								 2. Plot the new basis for a 2D matrix.</td>
+				    <td>1. Plot a set of rotational symmetries of a Square <br> using matplotlib/plotly.</td>
+				  </tr>
+				</table>
+				<b><i>Please note that you only have to choose one of the above categories.</i>	</b>
+			</li>
+		</ul>
+
+		<h4>Procedure to Submit:</h4>
+		<ol>
+			<li>Prepare a project directory in a .zip format which has the following:
+				<ol>
+					<li>
+						 A pdf file containing the lecture notes
+						 <ul>
+						 	<li>You can write either on LaTex or in Libreoffice (MS Word). Include the images of diagrams at relevant points.</li>
+							<li>Create a pdf file with the following naming convention: &lt;Complex/Group/Linear&gt;_&lt;TopicName&gt;.pdf</li>
+							<li>For example, if your chosen topic is Analytic Functions which comes under Complex Analysis, you would save the file as Complex_AnalyticFunctions.pdf</li>
+						 </ul>
+					</li>
+					<li> A python file or Ipython notebook containing the respective numerical computation code. The file should have the following naming convention:<br>"&lt;Complex/Group/Linear&gt;_&lt;\TopicName&gt;_python.py"</li>
+				</ol>
+			</li>
+			<li>Submit the .zip file in the submission portal. Follow the naming convention as "&lt;TOPIC&gt;.zip". For Example: "ConformalMapping.zip"</li>
+		</ol>
+
+		<h4>Technical Requirements</h4>
+		Basic to Intermediate knowledge in Python, good background in undergraduate mathematics,  mathematical writing <br><br>
+
+		<h4>Resources</h4>
+		<ul>
+			<li>Python3: <a href="https://python.fossee.in/self_learningcourse/">https://python.fossee.in/self_learningcourse/</a></li>
+			<li>Mathematical Writing: You can refer to  <a href="https://math.animations.fossee.in/realanalysis">https://math.animations.fossee.in/realanalysis</a></li>
+		</ul>
+
+		<h4>Evaluation Criteria</h4>
+		The submissions will be judged on:
+		<ol>
+			<li>Writing style – Articulation of formal mathematical concepts in easy to understand language.</li>
+			<li>Diagrams provided and how the diagrams connect with the text.</li>
+			<li>The correctness of the Python code  and the relevant plot.</li>
+		Further note that,
+			<li>If your writing/code has been copied in another submission, both the diagrams will be rejected.</li>
+			<li>If any plagarism is detected in the lecture notes writing, the submission will be rejected</li>
+		</ol>
+
+	</div>
+</div>
+{% endblock %}
