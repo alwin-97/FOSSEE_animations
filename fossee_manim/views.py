@@ -974,10 +974,10 @@ def faqs(request):
                   {'categories': categories})
 
 
-def fellowship(request):
+def fellowship2020(request):
     categories = Category.objects.all()
     return render(request,
-                  'fossee_manim/fellowship.html',
+                  'fossee_manim/fellowship2020.html',
                   {'categories': categories})
 
 
