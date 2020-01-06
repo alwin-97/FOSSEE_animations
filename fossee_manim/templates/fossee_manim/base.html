@@ -36,9 +36,13 @@
 	{% block header %}
 	<nav class="navbar navbar-expand-lg " style="background-color:#222222; color: white;">
 		<a class="navbar-brand" href="{% url 'index' %}">
+			<img src="{{ URL_ROOT }}/static/img/main_logo.png" width="43%" alt=""
+			style="margin-right: 50px; margin-left: 20px">
+		</a>
+		<!-- <a class="navbar-brand" href="{% url 'index' %}">
 			<img src="{{ URL_ROOT }}/static/img/logo_main.png" width="200" height="50" alt=""
 				style="margin-right: 50px; margin-left: 20px">
-		</a>
+		</a> -->
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

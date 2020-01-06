@@ -9,12 +9,13 @@ Login
 	<center>
 		<h1>Login</h1>
 		<div class="container" style="font-family: 'Lato', sans-serif; background-color:white;">
+			<div class="container">
 			<form method="post">
 				{% csrf_token %}
 				<table class="table table-bordered">
 					{{ form.as_table }}
-					<br>
-					<br>
+						<br>
+						<br>
 				</table>
 				<button class="btn btn-success btn-sm" type="submit"
 					style="background-color:#e45700;color:white; border:0px">Login</button>
@@ -26,6 +27,7 @@ Login
 					style="background-color:#157b80; color:white;">Register here!</a></p>
 	</center>
 	<br>
+	</div>
 </div>
 </div>
 {% endblock %}
