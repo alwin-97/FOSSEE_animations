@@ -52,31 +52,31 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'about' %}">About</a>
+					<a class="btn" style="color: white;" href="{% url 'about' %}">About</a>
 				</li>
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'guidelines' %}">Guidelines</a>
+					<a class="btn" style="color: white;" href="{% url 'guidelines' %}">Guidelines</a>
 				</li>
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'faqs' %}">FAQ</a>
+					<a class="btn" style="color: white;" href="{% url 'faqs' %}">FAQ</a>
 				</li>
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'honorarium' %}">Honorarium</a>
+					<a class="btn" style="color: white;" href="{% url 'honorarium' %}">Honorarium</a>
 				</li>
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'send_proposal' %}"><b>Submit Proposal</b></a>
+					<a class="btn" style="color: white;" href="{% url 'send_proposal' %}"><b>Submit Proposal</b></a>
 				</li>
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'fellowship2020' %}">Fellowship</a>
+					<a class="btn" style="color: white;" href="{% url 'fellowship2020' %}">Fellowship</a>
 				</li>
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'library' %}">Library</a>
+					<a class="btn" style="color: white;" href="{% url 'library' %}">Library</a>
 				</li>
 				{% if user.is_authenticated %}
 				{% if request.user.profile.position == 'contributor' %}
 
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'proposal_status' %}">Proposal Status</a>
+					<a class="btn" style="color: white;" href="{% url 'proposal_status' %}">Proposal Status</a>
 				</li>
 
 				{% else %}
@@ -87,20 +87,20 @@
 				{% endif %}
 
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'view_profile' %}">View Profile</a>
+					<a class="btn" style="color: white;" href="{% url 'view_profile' %}">View Profile</a>
 				</li>
 
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'logout' %}">Logout</a>
+					<a class="btn" style="color: white;" href="{% url 'logout' %}">Logout</a>
 				</li>
 				{% else %}
 
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'login' %}">Login</a>
+					<a class="btn" style="color: white;" href="{% url 'login' %}">Login</a>
 				</li>
 
 				<li class="nav-item active">
-					<a class="btn" href="{% url 'register' %}">Register</a>
+					<a class="btn" style="color: white;" href="{% url 'register' %}">Register</a>
 				</li>
 				{% endif %}
 			</ul>
