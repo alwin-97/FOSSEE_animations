@@ -128,19 +128,13 @@ hr {
 .footer{
     right: 0;
     left: 0;
-<<<<<<< HEAD
     bottom: 0;
     padding: 1rem;
-=======
-    position: relative;
-    bottom: 0;
-
-    owerflow: hidden;
-    padding: 95px;
->>>>>>> cfdc41deed280bddbcc6c3cf45e30f33ea139e88
+    overflow: hidden;
     text-align: center;
 }
-a{
+
+.navlink{
     color:white;
 }
 

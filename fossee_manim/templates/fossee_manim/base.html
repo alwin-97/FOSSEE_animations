@@ -2,29 +2,29 @@
 <html style="height: 100%;">
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>
-		{% block title %}
-		HomePage
-		{% endblock %}
-	</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+            HomePage
+        {% endblock %}
+    </title>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<!-- favicon -->
-	<link rel="shortcut icon" href="{{ URL_ROOT }}/static/img/favicon.ico" />
-	<link href="https://fonts.googleapis.com/css?family=Montserrat|Lato&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="{{ URL_ROOT }}/static/css/custom_base.css" type="text/css" />
-	<link rel="stylesheet" href="{{ URL_ROOT }}/static/css/index.css" type="text/css" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ URL_ROOT }}/static/img/favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL_ROOT }}/static/css/custom_base.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ URL_ROOT }}/static/css/index.css" type="text/css"/>
 </head>
 
 <!-- For js/ajax and other related scripts -->
@@ -33,143 +33,143 @@
 {% endblock %}
 
 <body>
-	{% block header %}
-	<nav class="navbar navbar-expand-lg " style="background-color:#222222; color: white;">
-		<a class="navbar-brand" href="{% url 'index' %}">
-			<img src="{{ URL_ROOT }}/static/img/logo_main.png" width="200" height="50" alt=""
-				style="margin-right: 50px; margin-left: 20px">
-		</a>
+{% block header %}
+    <nav class="navbar navbar-expand-lg " style="background-color:#222222; color: white;">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{{ URL_ROOT }}/static/img/logo_main.png" width="200" height="50" alt=""
+                 style="margin-right: 50px; margin-left: 20px">
+        </a>
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="fa fa-bars" style="color:white;"></span>
-		</button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars" style="color:white;"></span>
+        </button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'about' %}">About</a>
-				</li>
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'guidelines' %}">Guidelines</a>
-				</li>
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'faqs' %}">FAQ</a>
-				</li>
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'honorarium' %}">Honorarium</a>
-				</li>
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'send_proposal' %}"><b>Submit Proposal</b></a>
-				</li>
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'fellowship2020' %}">Fellowship</a>
-				</li>
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'library' %}">Library</a>
-				</li>
-				{% if user.is_authenticated %}
-				{% if request.user.profile.position == 'contributor' %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'guidelines' %}">Guidelines</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'faqs' %}">FAQ</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'honorarium' %}">Honorarium</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'send_proposal' %}"><b>Submit Proposal</b></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'fellowship2020' %}">Fellowship</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="btn navlink" href="{% url 'library' %}">Library</a>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if request.user.profile.position == 'contributor' %}
 
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'proposal_status' %}">Proposal Status</a>
-				</li>
+                        <li class="nav-item active">
+                            <a class="btn navlink" href="{% url 'proposal_status' %}">Proposal Status</a>
+                        </li>
 
-				{% else %}
+                    {% else %}
 
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'proposal_status' %}">Submitted Proposals</a>
-				</li>
-				{% endif %}
+                        <li class="nav-item active">
+                            <a class="btn navlink" href="{% url 'proposal_status' %}">Submitted Proposals</a>
+                        </li>
+                    {% endif %}
 
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'view_profile' %}">View Profile</a>
-				</li>
+                    <li class="nav-item active">
+                        <a class="btn navlink" href="{% url 'view_profile' %}">View Profile</a>
+                    </li>
 
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'logout' %}">Logout</a>
-				</li>
-				{% else %}
+                    <li class="nav-item active">
+                        <a class="btn navlink" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
 
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'login' %}">Login</a>
-				</li>
+                    <li class="nav-item active">
+                        <a class="btn navlink" href="{% url 'login' %}">Login</a>
+                    </li>
 
-				<li class="nav-item active">
-					<a class="btn" href="{% url 'register' %}">Register</a>
-				</li>
-				{% endif %}
-			</ul>
-			<form class="form-inline" method="POST" action="/search/" style="margin-left: 10px; margin-top: 10px; ">
-				{% csrf_token %}
-				<input class="form-control mr-sm-2" type="search" id="sbox" name="sbox"
-					placeholder="Search for animations">
-				<button class="btn btn-primary my-2 my-sm-0" id="btnblue" type="submit">
-					Search
-				</button>
-			</form>
+                    <li class="nav-item active">
+                        <a class="btn navlink" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <form class="form-inline" method="POST" action="/search/" style="margin-left: 10px; margin-top: 10px; ">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" id="sbox" name="sbox"
+                       placeholder="Search for animations">
+                <button class="btn btn-primary my-2 my-sm-0" id="btnblue" type="submit">
+                    Search
+                </button>
+            </form>
 
-		</div>
-	</nav>
-	{% endblock %}
+        </div>
+    </nav>
+{% endblock %}
 
-	{% block content %}
-	<br><br>
-	<h1>Base Template Content. Please override me</h1>
-	</div>
-	{% endblock %}
-	<!-- </main> -->
-
-	{% block footer %}
-        <footer class="page-footer">
-	<div class="footer" style="background-color: #222222; font-family: 'Lato', sans-serif; padding:95px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 text-center">
-					<img src="{{ URL_ROOT }}/static/img/fossee_logo_iitb.png" style="">
-				</div>
-				<div class="col-md-4 text" style="color:#dddddd;">
-					FOSSEE | IIT-Bombay <br>
-					Mumbai, India - 400-076 <br>
-					Phone: (+91) 22-2576-4133<br>
-					Email: animations@fossee.in
-				</div>
-				<div class="col-md-4 text-center" style="color:#dddddd; margin-top: 15px">
-					Follow us on:<br />
-					<a href="https://twitter.com/fosseenmeict" class="fa fa-twitter"></a>
-					&nbsp; &nbsp; &nbsp;
-					<a href="https://www.instagram.com/fossee_nmeict/" class="fa fa-instagram"></a>
-					&nbsp; &nbsp; &nbsp;
-					<a href="https://www.facebook.com/FOSSEENMEICT/" class="fa fa-facebook"></a>
-					&nbsp; &nbsp; &nbsp;
-					<a href="https://github.com/FOSSEE/" class="fa fa-github"></a>
-				</div>
-			</div>
-			<hr>
-			<div class="text-center row"
-				style="color: #dddddd; color:white;  padding:10px;margin-left: 10px; text-align:center; margin-bottom:0px;">
-				The FOSSEE project is funded by the National Mission on Education through ICT, MHRD, Government of
-				India.
-				This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
-			</div>
-		</div>
+{% block content %}
+    <br><br>
+    <h1>Base Template Content. Please override me</h1>
     </div>
-        </footer>
+{% endblock %}
+<!-- </main> -->
 
-	{% endblock footer %}
-	<!--
-	START Bootstrap-Alert
-	<div class="alert text-center cookiealert" role="alert" style="background: #d1ff3c; color: black;">
-		The website is currently undergoing some developmental changes. If you encounter any glitches, write to us at
-		animations@fossee.in ; we value your feedback and suggestions !
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	END Bootstrap-Alert -->
+{% block footer %}
+    <footer class="page-footer">
+        <div class="footer" style="background-color: #222222; font-family: 'Lato', sans-serif; padding:95px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="{{ URL_ROOT }}/static/img/fossee_logo_iitb.png" style="">
+                    </div>
+                    <div class="col-md-4 text" style="color:#dddddd;">
+                        FOSSEE | IIT-Bombay <br>
+                        Mumbai, India - 400-076 <br>
+                        Phone: (+91) 22-2576-4133<br>
+                        Email: animations@fossee.in
+                    </div>
+                    <div class="col-md-4 text-center" style="color:#dddddd; margin-top: 15px">
+                        Follow us on:<br/>
+                        <a href="https://twitter.com/fosseenmeict" class="fa fa-twitter"></a>
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="https://www.instagram.com/fossee_nmeict/" class="fa fa-instagram"></a>
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="https://www.facebook.com/FOSSEENMEICT/" class="fa fa-facebook"></a>
+                        &nbsp; &nbsp; &nbsp;
+                        <a href="https://github.com/FOSSEE/" class="fa fa-github"></a>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center row"
+                     style="color: #dddddd; color:white;  padding:10px;margin-left: 10px; text-align:center; margin-bottom:0px;">
+                    The FOSSEE project is funded by the National Mission on Education through ICT, MHRD, Government of
+                    India.
+                    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
+                </div>
+            </div>
+        </div>
+    </footer>
 
-	<!-- JS for alert -->
-	<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+{% endblock footer %}
+<!--
+START Bootstrap-Alert
+<div class="alert text-center cookiealert" role="alert" style="background: #d1ff3c; color: black;">
+    The website is currently undergoing some developmental changes. If you encounter any glitches, write to us at
+    animations@fossee.in ; we value your feedback and suggestions !
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+END Bootstrap-Alert -->
+
+<!-- JS for alert -->
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
 
 
 </body>
