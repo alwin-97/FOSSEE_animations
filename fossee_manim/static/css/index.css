@@ -138,6 +138,10 @@ hr {
     color:white;
 }
 
+.navlogo:hover{
+    background-color: #222222;
+}
+
 a:hover{
     color:white;
     background-color: gray;
